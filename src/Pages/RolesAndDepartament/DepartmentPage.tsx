@@ -5,12 +5,12 @@ import Button from "../../Components/Button";
 import FormButtons from "../../Components/FormButtons";
 import FormItem from "../../Components/FormItem";
 import Input from "../../Components/Input";
+import { useLoading } from "../../Components/Loading";
 import Panel from "../../Components/Panel";
 import ResponsiveGrid from "../../Components/ResponsiveGrid";
-import { Table, TableBody, TableData, TableHeader, TableHeaderValue, TableRow } from "../../Components/Table";
+import DataTable, { TableData, TableRow } from "../../Components/Table";
 import { DepartmentModel } from "../../Model/DepartmentModel";
 import { findAllDepartmentsByFilter } from "../../Service/RolesAndDepartmentService";
-import { useLoading } from "../../Components/Loading";
 
 export default function DepartmentPage() {
     const { setLoading } = useLoading();
@@ -26,6 +26,20 @@ export default function DepartmentPage() {
                 setDepartments(response.data);
                 setLoading(false)
             });
+    }
+
+    const dataTemplate = () => {
+        return (
+            departments.map((item, index) => {
+                return (
+                    <TableRow key={index}>
+                        <TableData>{item.name}</TableData>
+                        <TableData>
+                            <FaRegEdit onClick={() => navigate(`/job-and-departments/department/${item.id}`)}></FaRegEdit>
+                        </TableData>
+                    </TableRow>
+                )
+            }))
     }
 
     return (
@@ -45,26 +59,7 @@ export default function DepartmentPage() {
                 </form>
             </Panel>
             <Panel title="Resultado">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHeaderValue>Departamento</TableHeaderValue>
-                            <TableHeaderValue>Ações</TableHeaderValue>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {departments.map((item, index) => {
-                            return (
-                                <TableRow key={index}>
-                                    <TableData>{item.name}</TableData>
-                                    <TableData>
-                                        <FaRegEdit onClick={() => navigate(`/job-and-departments/department/${item.id}`)}></FaRegEdit>
-                                    </TableData>
-                                </TableRow>
-                            )
-                        })}
-                    </TableBody>
-                </Table>
+                <DataTable headers={["Departamento", "Ações"]} data={departments} dataTemaplte={dataTemplate()}></DataTable>
                 <Button label="Adicionar departamento" onClick={() => navigate("/job-and-departments/department/0")}></Button>
             </Panel>
         </>

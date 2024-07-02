@@ -34,6 +34,7 @@ const TableData = styled.td<TableProps>`
 const Table = styled.table`
     border-collapse: collapse;
     width: 100%;
+    margin-bottom: 10px;
 
     @media screen and (max-width: 40em) {
         ${TableHeader},
@@ -69,5 +70,60 @@ const Table = styled.table`
         }
     }
 `;
+
+export const TableLoading = styled.div`
+    background-color: #ededed;
+    height: 22px;
+    border-radius: 7px;
+    width: 100%;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #eee 20%, #ddd 50%, #eee 80%);
+    background-size: 200% 100%;
+    background-position-x: 100%;
+    animation: 1s loading ease-in-out infinite;
+
+    @keyframes loading {
+        to{
+            background-position-x: -30%
+        }
+    }
+`
+
+export default function DataTable(props: { headers?: string[], data?: any[], dataKeys?: string[], dataTemaplte?: any[] | any, loading?: boolean }) {
+    return (
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    {props.headers?.map((header, index) => (
+                        <TableHeaderValue key={index}>{header}</TableHeaderValue>
+                    ))}
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                <TableRow>
+                    {props.loading && props.headers && (
+                        props.headers.map((_, index) => {
+                            return (
+                                <TableData key={index}>
+                                    <TableLoading></TableLoading>
+                                    <TableLoading></TableLoading>
+                                    <TableLoading></TableLoading>
+                                </TableData>
+                            )
+                        })
+                    )}
+                </TableRow>
+                {props.dataTemaplte && props.dataTemaplte}
+                {props.data?.map((data, index) => (
+                    <TableRow key={index}>
+                        {props.dataKeys?.map((key, index) => (
+                            <TableData key={index}>{data[key]}</TableData>
+                        ))}
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+    )
+}
 
 export { Table, TableBody, TableData, TableHeader, TableHeaderValue, TableRow };

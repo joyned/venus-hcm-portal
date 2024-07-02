@@ -10,7 +10,7 @@ import Panel from "../../Components/Panel";
 import ResponsiveGrid from "../../Components/ResponsiveGrid";
 import DataTable, { TableData, TableRow } from "../../Components/Table";
 import { DepartmentModel } from "../../Model/DepartmentModel";
-import { findAllDepartmentsByFilter } from "../../Service/RolesAndDepartmentService";
+import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
 
 export default function DepartmentPage() {
     const { setLoading } = useLoading();

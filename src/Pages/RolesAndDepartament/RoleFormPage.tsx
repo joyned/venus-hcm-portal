@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button";
 import FormButtons from "../../Components/FormButtons";
 import FormItem from "../../Components/FormItem";
 import Input from "../../Components/Input";
+import InputSwitch from "../../Components/InputSwitch";
 import { useLoading } from "../../Components/Loading";
 import Panel from "../../Components/Panel";
 import ResponsiveGrid from "../../Components/ResponsiveGrid";
 import Select from "../../Components/Select";
 import TextArea from "../../Components/TextArea";
 import { DepartmentModel } from "../../Model/DepartmentModel";
-import { findAllDepartmentsByFilter, findRoleById, saveRole } from "../../Service/RolesAndDepartmentService";
 import { RoleModel } from "../../Model/RoleModel";
-import { useNavigate, useParams } from "react-router-dom";
-import InputSwitch from "../../Components/InputSwitch";
+import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
+import { findRoleById, saveRole } from "../../Service/RoleService";
 
 export default function RoleFormPage() {
     const params = useParams();

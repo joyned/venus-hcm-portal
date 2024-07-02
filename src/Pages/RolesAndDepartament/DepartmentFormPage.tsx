@@ -7,7 +7,7 @@ import Panel from "../../Components/Panel";
 import ResponsiveGrid from "../../Components/ResponsiveGrid";
 import TextArea from "../../Components/TextArea";
 import { DepartmentModel } from "../../Model/DepartmentModel";
-import { findDepartmentById, saveDepartment } from "../../Service/RolesAndDepartmentService";
+import { findDepartmentById, saveDepartment } from "../../Service/DepartmentService";
 import { useNavigate, useParams } from "react-router-dom";
 import { AxiosResponse } from "axios";
 import { useLoading } from "../../Components/Loading";

@@ -16,8 +16,9 @@ import { DepartmentModel } from "../../Model/DepartmentModel"
 import { EmployeeModel } from "../../Model/EmployeeModel"
 import { RoleModel } from "../../Model/RoleModel"
 import { findAllCities } from "../../Service/CityBaseService"
+import { findAllDepartmentsByFilter } from "../../Service/DepartmentService"
 import { findEmployeeByFilter } from "../../Service/EmployeeService"
-import { findAllDepartmentsByFilter, findAllRolesByFilter } from "../../Service/RolesAndDepartmentService"
+import { findAllRolesByFilter } from "../../Service/RoleService"
 
 const EmployeePageContent = styled.div``
 

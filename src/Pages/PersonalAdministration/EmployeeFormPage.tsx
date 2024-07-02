@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button";
 import FormButtons from "../../Components/FormButtons";
 import FormItem from "../../Components/FormItem";
+import GoToTop from "../../Components/GoToTop";
 import Input from "../../Components/Input";
 import { useLoading } from "../../Components/Loading";
 import Panel from "../../Components/Panel";
@@ -17,8 +18,7 @@ import { findAllCities } from "../../Service/CityBaseService";
 import { findAllContractTypes } from "../../Service/ContractTypeService";
 import { findAllGenders } from "../../Service/DiversityAndInclusionService";
 import { findEmployeeById, saveEmployee } from "../../Service/EmployeeService";
-import { findAllRolesByFilter } from "../../Service/RolesAndDepartmentService";
-import GoToTop from "../../Components/GoToTop";
+import { findAllRolesByFilter } from "../../Service/RoleService";
 
 export default function EmployeeFormPage() {
     const navigate = useNavigate();

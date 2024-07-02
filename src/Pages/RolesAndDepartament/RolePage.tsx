@@ -12,7 +12,8 @@ import Select from "../../Components/Select";
 import DataTable, { TableData, TableRow } from "../../Components/Table";
 import { DepartmentModel } from "../../Model/DepartmentModel";
 import { RoleModel } from "../../Model/RoleModel";
-import { findAllDepartmentsByFilter, findAllRolesByFilter } from "../../Service/RolesAndDepartmentService";
+import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
+import { findAllRolesByFilter } from "../../Service/RoleService";
 
 
 export default function RolePage() {

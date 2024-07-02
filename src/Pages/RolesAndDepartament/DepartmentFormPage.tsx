@@ -19,6 +19,7 @@ export default function DepartmentFormPage() {
     const [id, setId] = useState(0);
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
+    const [createdAt, setCreatedAt] = useState<Date | undefined>(undefined);
 
     useEffect(() => {
         if (params.id && params.id !== '0') {
@@ -28,6 +29,7 @@ export default function DepartmentFormPage() {
                     setId(Number(response.data.id));
                     setName(response.data.name);
                     setDescription(response.data.description);
+                    setCreatedAt(response.data.createdAt);
                     setLoading(false);
                 })
         }
@@ -41,7 +43,8 @@ export default function DepartmentFormPage() {
         const department: DepartmentModel = {
             id: id === 0 ? undefined : id,
             name: name,
-            description: description
+            description: description,
+            createdAt: createdAt
         }
 
         saveDepartment(department)

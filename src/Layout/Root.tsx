@@ -5,7 +5,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import styled from "styled-components";
 import { leftSideMenu, root, topMenu } from "../Components/UI/Variables";
 import { ReactElement, useState } from "react";
-import { hcmMenu } from "../Service/LayoutService";
+import { hcmMenu } from "../Service/MenuService";
 import VenusHCMMenu from "../Model/VenusHCMMenu";
 import { useNavigate } from "react-router-dom";
 import Loading, { useLoading } from "../Components/Loading";

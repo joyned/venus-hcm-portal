@@ -6,10 +6,9 @@ import Input from "../../Components/Input";
 import Panel from "../../Components/Panel";
 import ResponsiveGrid from "../../Components/ResponsiveGrid";
 import Select from "../../Components/Select";
+import { ContractTypeEnum } from "../../Model/ContractTypeEnum";
 import { GenderTypeEnum } from "../../Model/GenderTypeEnum";
 import { enumToJsonArray } from "../../Utils/GeneralUtils";
-import { ContractTypeEnum } from "../../Model/ContractTypeEnum";
-import { EmployeeModel } from "../../Model/EmployeeModel";
 
 export default function EmployeeFormPage() {
     const [name, setName] = useState('')
@@ -54,65 +53,6 @@ export default function EmployeeFormPage() {
 
     const onSubmit = (e: any) => {
         e.preventDefault()
-
-        const employee: EmployeeModel = {
-            id: 0,
-            name: name,
-            birthdate: new Date(birthdate),
-            gender: gender['name'],
-            address: {
-                id: 0,
-                street: street,
-                number: Number(number),
-                neighbourhood: neighborhood,
-                city: city
-            },
-            email: email,
-            telephone: telephone,
-            cpf: cpf,
-            rg: rg,
-            workCard: workCard,
-            voterRegistration: voterRegistration,
-            license: license,
-            passport: passport,
-            admissionDate: new Date(admissionDate),
-            role: {
-                id: 0,
-                name: role,
-                description: '',
-                createdAt: new Date(),
-                department: {
-                    id: 0,
-                    name: department,
-                    description: '',
-                    createdAt: new Date()
-                }
-            },
-            contractType: contractType['name'],
-            workTime: Number(workload),
-            cityBase: {
-                id: 0,
-                city: city,
-                createdAt: new Date()
-            },
-            employeeBenefit: {
-                id: 0,
-                additional: Number(additionals),
-                others: Number(benefits)
-            },
-            bankNumber: bank,
-            bankAgency: agency,
-            bankAccount: account,
-            emergencyContact: [
-                {
-                    id: 0,
-                    name: emergencyContactName,
-                    telephone: emergencyContactTelephone
-                }
-            ]
-        }
-
-        console.log(employee);
     }
 
     return (

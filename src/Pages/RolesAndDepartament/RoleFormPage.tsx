@@ -12,6 +12,7 @@ import { DepartmentModel } from "../../Model/DepartmentModel";
 import { findAllDepartmentsByFilter, findRoleById, saveRole } from "../../Service/RolesAndDepartmentService";
 import { RoleModel } from "../../Model/RoleModel";
 import { useNavigate, useParams } from "react-router-dom";
+import InputSwitch from "../../Components/InputSwitch";
 
 export default function RoleFormPage() {
     const params = useParams();
@@ -20,28 +21,33 @@ export default function RoleFormPage() {
 
     const [departamentOptions, setDepartamentOptions] = useState<DepartmentModel[]>([]);
 
+    const [roleId, setRoleId] = useState<number | undefined>(undefined);
     const [roleName, setRoleName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [department, setDepartment] = useState<DepartmentModel>();
+    const [active, setActive] = useState<boolean>(true);
+    const [createdAt, setCreatedAt] = useState<Date | undefined>(undefined);
 
     useEffect(() => {
-        const id = Number(params.id);
+        setRoleId(Number(params.id));
 
         setLoading(true);
         findAllDepartmentsByFilter("").then(response => {
             setDepartamentOptions(response.data);
-            if (id && id !== 0) {
-                findRoleById(id).then(response => {
+            if (roleId && roleId > 0) {
+                findRoleById(roleId).then(response => {
                     setRoleName(response.data.name);
                     setDescription(response.data.description);
                     setDepartment(response.data.department);
+                    setActive(response.data.active);
+                    setCreatedAt(response.data.createdAt);
                     setLoading(false);
                 });
             } else {
                 setLoading(false);
             }
         });
-    }, [params.id, setLoading]);
+    }, [params.id, roleId, setLoading]);
 
     const onSubmit = (e: any) => {
         e.preventDefault();
@@ -49,9 +55,12 @@ export default function RoleFormPage() {
         if (department && roleName && description) {
             setLoading(true)
             const role: RoleModel = {
+                id: roleId,
                 name: roleName,
                 description: description,
-                department: department
+                department: department,
+                createdAt: createdAt,
+                active: active
             }
 
             saveRole(role).then(response => {
@@ -81,6 +90,10 @@ export default function RoleFormPage() {
                     <FormItem>
                         <label>Descrição</label>
                         <TextArea value={description} onChange={(value) => setDescription(value)}></TextArea>
+                    </FormItem>
+                    <FormItem>
+                        <label>Ativo</label>
+                        <InputSwitch value={active} onChange={() => setActive(!active)}></InputSwitch>
                     </FormItem>
                 </ResponsiveGrid>
             </Panel>

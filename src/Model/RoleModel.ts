@@ -5,5 +5,6 @@ export interface RoleModel {
   name: string;
   description: string;
   createdAt?: Date;
+  active: boolean;
   department: DepartmentModel;
 }

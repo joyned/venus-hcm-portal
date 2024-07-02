@@ -119,6 +119,14 @@ const hcmMenu: VenusHCMMenu[] = [
         ],
     },
     {
+        name: "Administração Interna",
+        subMenu: [
+            { name: "Bases", subMenu: [] },
+            { name: "Tipos de Contratos", subMenu: [] },
+            { name: "Diversidade / Inclusão", subMenu: [] },
+        ],
+    },
+    {
         name: "Software e Integrações",
         subMenu: [
             { name: "Cadastro de Integrações", subMenu: [] },

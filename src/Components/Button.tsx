@@ -9,7 +9,7 @@ const ButtonComponent = styled.div<ButtonComponentProps>`
     background-color: ${props => props.transparent ? "transparent" : root.primaryColor};
     border: 1px solid ${root.primaryColor};
     cursor: pointer;
-    width: 100px;
+    width: 100%;
     padding: 10px;
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@ const ButtonAction = styled.button<ButtonComponentProps>`
 
 export default function Button(props: { label?: string, type?: 'submit' | 'reset' | 'button', transparent?: boolean, onClick?: () => void }) {
     return (
-        <ButtonAction type={props.type} transparent={props.transparent ? true : undefined}>
+        <ButtonAction type={props.type ?? 'button'} transparent={props.transparent ? true : undefined} onClick={() => props.onClick && props.onClick()}>
             <ButtonComponent transparent={props.transparent ? true : undefined}>
                 {props.label}
             </ButtonComponent>

@@ -1,13 +1,12 @@
-import styled from "styled-components"
-import Button from "../../Components/Button"
-import FormButtons from "../../Components/FormButtons"
-import FormItem from "../../Components/FormItem"
-import Input from "../../Components/Input"
-import Panel from "../../Components/Panel"
-import ResponsiveGrid from "../../Components/ResponsiveGrid"
-import { Table, TableBody, TableData, TableHeader, TableHeaderValue, TableRow } from "../../Components/Table"
+import Button from "../../Components/Button";
+import FormButtons from "../../Components/FormButtons";
+import FormItem from "../../Components/FormItem";
+import Input from "../../Components/Input";
+import Panel from "../../Components/Panel";
+import ResponsiveGrid from "../../Components/ResponsiveGrid";
+import { Table, TableBody, TableData, TableHeader, TableHeaderValue, TableRow } from "../../Components/Table";
+import { IoDocumentsOutline } from "react-icons/io5";
 
-const EmployeePageContent = styled.div``
 
 const tempData = [
     {
@@ -30,10 +29,10 @@ const tempData = [
     }
 ]
 
-export default function EmployeePage() {
+export default function RoleAndFunctionsHistoryPage() {
     return (
-        <EmployeePageContent>
-            <Panel title="Filtros">
+        <div>
+            <Panel title="Histórico de cargos e funções">
                 <form>
                     <ResponsiveGrid columns={2}>
                         <FormItem>
@@ -67,6 +66,7 @@ export default function EmployeePage() {
                             <TableHeaderValue>Departamento</TableHeaderValue>
                             <TableHeaderValue>Cargo</TableHeaderValue>
                             <TableHeaderValue>Data de Admissão</TableHeaderValue>
+                            <TableHeaderValue>Ações</TableHeaderValue>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -77,12 +77,15 @@ export default function EmployeePage() {
                                     <TableData>{item.department}</TableData>
                                     <TableData>{item.role}</TableData>
                                     <TableData>{item.admissionDate}</TableData>
+                                    <TableData>
+                                        <IoDocumentsOutline></IoDocumentsOutline>
+                                    </TableData>
                                 </TableRow>
                             )
                         })}
                     </TableBody>
                 </Table>
             </Panel>
-        </EmployeePageContent>
+        </div>
     )
 }

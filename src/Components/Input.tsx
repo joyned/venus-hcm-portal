@@ -15,7 +15,7 @@ const InputField = styled.input`
     color: ${root.textColor};
 `
 
-export default function Input(props: { placeholder?: string, value?: string, type?: 'text' | 'password' | 'date' | 'number' | 'email', onChange?: (value: string) => void }) {
+export default function Input(props: { placeholder?: string, value?: string, type?: 'text' | 'password' | 'date' | 'number' | 'email' | 'textarea', onChange?: (value: string) => void }) {
     return (
         <InputComponent>
             <InputField type={props.type}

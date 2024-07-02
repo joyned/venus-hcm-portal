@@ -4,18 +4,17 @@ const hcmMenu: VenusHCMMenu[] = [
     {
         name: "Administração de Pessoal",
         subMenu: [
-            { name: "Cadastro de funcionários", uri: "/employee", subMenu: [] },
-            { name: "Gestão de dados pessoais e documentos", subMenu: [] },
-            { name: "Histórico de cargos e funções", subMenu: [] },
+            { name: "Cadastro de funcionários", uri: "/personal-administration/employee", subMenu: [] },
+            { name: "Histórico de cargos e funções", uri: "/personal-administration/functions-history", subMenu: [] },
         ],
     },
     {
         name: "Recrutamento e Seleção",
         subMenu: [
-            { name: "Publicação de vagas", subMenu: [] },
-            { name: "Triagem de currículos", subMenu: [] },
-            { name: "Gestão de entrevistas", subMenu: [] },
-            { name: "Onboarding de novos funcionários", subMenu: [] },
+            { name: "Publicação de vagas", uri: "/recruitment/publishing", subMenu: [] },
+            { name: "Triagem de currículos", uri: "/recruitment/resume-screening", subMenu: [] },
+            { name: "Gestão de entrevistas", uri: "/recruitment/interview-management", subMenu: [] },
+            { name: "Onboarding de novos funcionários", uri: "/recruitment/employee-onboarding", subMenu: [] },
         ],
     },
     {

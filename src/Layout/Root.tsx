@@ -15,10 +15,14 @@ const RootLayout = styled.div`
 `
 
 const TopBar = styled.div`
+    position: fixed;
+    top: 0;
+    width: 100%;
     background-color: ${topMenu.backgroundColor};
     color: ${topMenu.color};
     display: flex;
-    `
+    z-index: 999;
+`
 
 const TopBarItems = styled.div`
     display: flex;
@@ -80,6 +84,7 @@ const LeftSideMenuBackButton = styled.div`
 
 const MainContent = styled.div`
     padding: 15px;
+    margin-top: 45px;
 `;
 
 export default function Root(props: { children?: ReactElement }) {

@@ -21,6 +21,25 @@ a {
 span, p, label, ${TableData} {
     color: ${root.textColor};
 }
+
+svg {
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: ${root.primaryColor}; 
+}
+
 `;
 
 export default GlobalStyles;

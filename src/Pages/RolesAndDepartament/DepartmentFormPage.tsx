@@ -48,7 +48,7 @@ export default function DepartmentFormPage() {
             .then((response: AxiosResponse<DepartmentModel>) => {
                 setId(Number(response.data.id));
                 setLoading(false);
-                navigate(`/job-and-departments/department/${response.data.id}`)
+                navigate(`/roles-and-departments/department/${response.data.id}`)
             })
     }
 
@@ -56,7 +56,7 @@ export default function DepartmentFormPage() {
         <form onSubmit={(e) => onSubmit(e)}>
             <FormButtons align="end">
                 <Button label="Salvar" type="submit"></Button>
-                <Button label="Voltar" transparent type="button" onClick={() => navigate(`/job-and-departments/department`)}></Button>
+                <Button label="Voltar" transparent type="button" onClick={() => navigate(`/roles-and-departments/department`)}></Button>
             </FormButtons>
             <Panel title={name ? name : 'Novo departamento'}>
                 <ResponsiveGrid columns={1}>

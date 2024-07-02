@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { root } from "./UI/Variables";
+import { useLoading } from "./Loading";
 
 interface TableProps {
     align?: string;
@@ -89,7 +90,8 @@ export const TableLoading = styled.div`
     }
 `
 
-export default function DataTable(props: { headers?: string[], data?: any[], dataKeys?: string[], dataTemaplte?: any[] | any, loading?: boolean }) {
+export default function DataTable(props: { headers?: string[], data?: any[], dataKeys?: string[], dataTemaplte?: any[] | any }) {
+    const { loading } = useLoading();
     return (
         <Table>
             <TableHeader>
@@ -101,7 +103,7 @@ export default function DataTable(props: { headers?: string[], data?: any[], dat
             </TableHeader>
             <TableBody>
                 <TableRow>
-                    {props.loading && props.headers && (
+                    {loading && props.headers && (
                         props.headers.map((_, index) => {
                             return (
                                 <TableData key={index}>

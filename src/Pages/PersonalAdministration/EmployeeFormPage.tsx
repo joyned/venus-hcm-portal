@@ -79,7 +79,14 @@ export default function EmployeeFormPage() {
             role: {
                 id: 0,
                 name: role,
-                createdAt: new Date()
+                description: '',
+                createdAt: new Date(),
+                department: {
+                    id: 0,
+                    name: department,
+                    description: '',
+                    createdAt: new Date()
+                }
             },
             contractType: contractType['name'],
             workTime: Number(workload),

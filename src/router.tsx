@@ -23,14 +23,14 @@ const router = createBrowserRouter([
         element: <LoginPage></LoginPage>
     },
     {
-        path: "job-and-departments",
+        path: "roles-and-departments",
         children: [
             {
-                path: "job",
+                path: "role",
                 element: <Root><RolePage></RolePage></Root>
             },
             {
-                path: "job/:id",
+                path: "role/:id",
                 element: <Root><RoleFormPage></RoleFormPage></Root>
             },
             {

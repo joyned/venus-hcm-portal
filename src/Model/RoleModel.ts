@@ -1,5 +1,9 @@
+import { DepartmentModel } from './DepartmentModel';
+
 export interface RoleModel {
-  id: number;
+  id?: number;
   name: string;
-  createdAt: Date;
+  description: string;
+  createdAt?: Date;
+  department: DepartmentModel;
 }

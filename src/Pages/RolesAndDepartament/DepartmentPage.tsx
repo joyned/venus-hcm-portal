@@ -20,6 +20,7 @@ export default function DepartmentPage() {
 
     const onFilter = (e: any) => {
         e.preventDefault();
+        setDepartments([]);
         setLoading(true);
         findAllDepartmentsByFilter(filterName)
             .then((response) => {
@@ -35,7 +36,7 @@ export default function DepartmentPage() {
                     <TableRow key={index}>
                         <TableData>{item.name}</TableData>
                         <TableData>
-                            <FaRegEdit onClick={() => navigate(`/job-and-departments/department/${item.id}`)}></FaRegEdit>
+                            <FaRegEdit onClick={() => navigate(`/roles-and-departments/department/${item.id}`)}></FaRegEdit>
                         </TableData>
                     </TableRow>
                 )
@@ -44,6 +45,10 @@ export default function DepartmentPage() {
 
     return (
         <>
+            <FormButtons align="end">
+                <Button label="Adicionar departamento" onClick={() => navigate("/roles-and-departments/department/0")}></Button>
+            </FormButtons>
+
             <Panel title="Cadastro de departamentos">
                 <form onSubmit={(e) => onFilter(e)}>
                     <ResponsiveGrid columns={1}>
@@ -60,7 +65,6 @@ export default function DepartmentPage() {
             </Panel>
             <Panel title="Resultado">
                 <DataTable headers={["Departamento", "Ações"]} data={departments} dataTemaplte={dataTemplate()}></DataTable>
-                <Button label="Adicionar departamento" onClick={() => navigate("/job-and-departments/department/0")}></Button>
             </Panel>
         </>
     )

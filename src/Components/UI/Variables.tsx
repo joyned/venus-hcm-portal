@@ -3,7 +3,9 @@ export const root = {
     primaryColor: "#384b73",
     secondaryColor: "#2b2b2b",
     backgroundColor: "#f0f0f0",
-    textColor: "#676767"
+    textColor: "#676767",
+    textSize: "13px",
+    titleSize: "15px"
 }
 
 export const topMenu = {

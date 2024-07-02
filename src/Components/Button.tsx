@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { root } from "./UI/Variables";
 
 interface ButtonComponentProps {
-    transparent?: boolean;
+    $transparent?: boolean;
 }
 
 const ButtonComponent = styled.div<ButtonComponentProps>`
-    background-color: ${props => props.transparent ? "transparent" : root.primaryColor};
+    background-color: ${props => props.$transparent ? "transparent" : root.primaryColor};
     border: 1px solid ${root.primaryColor};
     cursor: pointer;
     width: 100%;
@@ -20,15 +20,15 @@ const ButtonComponent = styled.div<ButtonComponentProps>`
 const ButtonAction = styled.button<ButtonComponentProps>`
     border: none;
     background-color: transparent;
-    color: ${props => props.transparent ? root.textColor : "white"};
-    font-size: 15px;
+    color: ${props => props.$transparent ? root.textColor : "white"};
+    font-size: ${root.textSize};
     cursor: pointer;
 `
 
 export default function Button(props: { label?: string, type?: 'submit' | 'reset' | 'button', transparent?: boolean, onClick?: () => void }) {
     return (
-        <ButtonAction type={props.type ?? 'button'} transparent={props.transparent ? true : undefined} onClick={() => props.onClick && props.onClick()}>
-            <ButtonComponent transparent={props.transparent ? true : undefined}>
+        <ButtonAction type={props.type ?? 'button'} $transparent={props.transparent ? true : undefined} onClick={() => props.onClick && props.onClick()}>
+            <ButtonComponent $transparent={props.transparent ? true : undefined}>
                 {props.label}
             </ButtonComponent>
         </ButtonAction>

@@ -18,6 +18,7 @@ import { findAllContractTypes } from "../../Service/ContractTypeService";
 import { findAllGenders } from "../../Service/DiversityAndInclusionService";
 import { findEmployeeById, saveEmployee } from "../../Service/EmployeeService";
 import { findAllRolesByFilter } from "../../Service/RolesAndDepartmentService";
+import GoToTop from "../../Components/GoToTop";
 
 export default function EmployeeFormPage() {
     const navigate = useNavigate();
@@ -193,6 +194,7 @@ export default function EmployeeFormPage() {
 
     return (
         <form onSubmit={(e) => onSubmit(e)}>
+            <GoToTop></GoToTop>
             <FormButtons align="end">
                 <Button label="Salvar" type="submit"></Button>
                 <Button label="Cancelar" transparent type="button" onClick={() => navigate('/personal-administration/employee')}></Button>

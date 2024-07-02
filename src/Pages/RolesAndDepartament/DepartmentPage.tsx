@@ -34,8 +34,8 @@ export default function DepartmentPage() {
             departments.map((item, index) => {
                 return (
                     <TableRow key={index}>
-                        <TableData>{item.name}</TableData>
-                        <TableData>
+                        <TableData data-label="Departamento">{item.name}</TableData>
+                        <TableData data-label="Ação">
                             <FaRegEdit onClick={() => navigate(`/roles-and-departments/department/${item.id}`)}></FaRegEdit>
                         </TableData>
                     </TableRow>

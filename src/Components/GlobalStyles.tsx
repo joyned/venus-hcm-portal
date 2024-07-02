@@ -18,8 +18,13 @@ a {
     box-sizing: border-box;
 }
 
+h1, h2, h3 {
+  font-size: 15px;
+}
+
 span, p, label, ${TableData} {
     color: ${root.textColor};
+    font-size: 13px;
 }
 
 svg {

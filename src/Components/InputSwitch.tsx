@@ -6,7 +6,7 @@ const InputSwitchComponent = styled.label`
     position: relative;
     display: inline-block;
     width: 60px;
-    height: 34px;
+    height: 25px;
     margin-top: 10px;
 `
 
@@ -25,9 +25,9 @@ const InputSwitchSlider = styled.span`
     &:before {
         position: absolute;
         content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
+        height: 18px;
+        width: 18px;
+        left: 9px;
         bottom: 4px;
         background-color: white;
         -webkit-transition: .4s;

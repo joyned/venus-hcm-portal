@@ -7,13 +7,14 @@ interface TableProps {
 }
 
 const TableHeader = styled.thead`
-    background-color: ${root.secondaryColor};
+    background-color: ${root.primaryColor};
     color: white;
 `;
 
 const TableHeaderValue = styled.th<TableProps>`
     padding: 30px;
     text-align: ${(props) => props.align || "left"};
+    font-size: ${root.titleSize};
 `;
 
 const TableBody = styled.tbody``;
@@ -28,6 +29,7 @@ const TableRow = styled.tr`
 
 const TableData = styled.td<TableProps>`
     padding: 30px;
+    font-size: ${root.textSize};
     text-align: ${(props) => props.align || "left"};
 `;
 
@@ -59,6 +61,15 @@ const Table = styled.table`
 
         ${TableData} {
             padding: 10px;
+            display: flex;
+            justify-content: space-between;
+
+            &::before {
+                content: attr(data-label);
+                width: 50%;
+                font-weight: bold;
+                text-align: left;
+            }
         }
 
         ${TableData}.pivoted {

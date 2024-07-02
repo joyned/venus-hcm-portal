@@ -30,7 +30,7 @@ const TopBarItems = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 10px 15px;
+    padding: 13px 15px;
 `
 
 const TopBarItem = styled.div`
@@ -43,7 +43,7 @@ const TopBarItem = styled.div`
 
 const TopBarItemAppName = styled.span`
     font-family: "Bona Nova SC", serif;
-    font-size: x-large;
+    font-size: large;
     color: white;
 `
 
@@ -60,6 +60,7 @@ const LeftSideMenu = styled.div`
     padding: 15px;
     opacity:0;
     transition:visibility 0.3s linear,opacity 0.3s linear;
+    z-index: 1;
 `
 
 const LeftSideMenuItem = styled.div`
@@ -67,7 +68,7 @@ const LeftSideMenuItem = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    font-size: ${leftSideMenu.fontSize};
+    font-size: ${root.textSize};
     cursor: pointer;
 
     &:hover {
@@ -85,9 +86,14 @@ const LeftSideMenuBackButton = styled.div`
     padding: 15px 0;
 `
 
-const MainContent = styled.div`
+const MainContent = styled.div<{ $menuOpened: boolean }>`
     padding: 15px;
     margin-top: 45px;
+    margin-left: ${({ $menuOpened }) => $menuOpened ? '240px' : '0'};
+
+    @media (max-width: 750px) {
+        margin-left: 0;
+    }
 `;
 
 export default function Root(props: { children?: ReactElement }) {
@@ -100,6 +106,7 @@ export default function Root(props: { children?: ReactElement }) {
     const changeMenu = (menu: VenusHCMMenu) => {
         if (menu.uri) {
             navigate(menu.uri);
+            setMenuOpen(false);
             return;
         } else if (menu.subMenu.length === 0) {
             return;
@@ -149,7 +156,7 @@ export default function Root(props: { children?: ReactElement }) {
                         )
                     })}
                 </LeftSideMenu>
-                <MainContent style={{ marginLeft: menuOpen ? '240px' : '0' }}>
+                <MainContent $menuOpened={menuOpen} onClick={() => setMenuOpen(false)}>
                     {props.children}
                 </MainContent>
             </Loading>

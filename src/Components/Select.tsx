@@ -1,14 +1,14 @@
 import { CSSProperties, useEffect, useState } from "react";
 import styled from "styled-components";
-import { root } from "./UI/Variables";
+import { input, root } from "./UI/Variables";
 
 const SelectComponent = styled.select`
     margin: 9px 0;
     padding: 10px;
-    border: 1px solid grey;
+    border: 1px solid ${input.borderColor};
     border-radius: 5px;
     width: 100%;
-    font-size: 16px;
+    font-size: ${root.textSize};
     color: ${root.textColor};
     background-color: transparent;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
@@ -18,6 +18,14 @@ const SelectComponent = styled.select`
         border: 1px solid #0077cc;
         box-shadow: 0 0 5px rgba(0,0,0,0.3);
     }
+
+    &::placeholder {
+        font-size: ${root.textSize};
+    }
+
+    &:after {
+        border: none;
+    }
 `;
 
 const SelectOption = styled.option`
@@ -25,7 +33,7 @@ const SelectOption = styled.option`
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 100%;
-    font-size: 16px;
+    font-size: ${root.textSize};
     color: #333;
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);

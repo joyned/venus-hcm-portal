@@ -71,11 +71,11 @@ export default function EmployeePage() {
             employees.map((item, index) => {
                 return (
                     <TableRow key={index}>
-                        <TableData>{item.name}</TableData>
-                        <TableData>{item.role.department.name}</TableData>
-                        <TableData>{item.role.name}</TableData>
-                        <TableData>{String(item.admissionDate)}</TableData>
-                        <TableData>
+                        <TableData data-label="Nome">{item.name}</TableData>
+                        <TableData data-label="Departamento">{item.role.department.name}</TableData>
+                        <TableData data-label="Cargo">{item.role.name}</TableData>
+                        <TableData data-label="Admissão">{String(item.admissionDate)}</TableData>
+                        <TableData data-label="Ações">
                             <FaEdit onClick={() => navigate(`/personal-administration/employee/${item.id}`)}></FaEdit>
                         </TableData>
                     </TableRow>
@@ -86,6 +86,9 @@ export default function EmployeePage() {
 
     return (
         <EmployeePageContent>
+            <FormButtons align="end">
+                <Button type="button" onClick={() => navigate("/personal-administration/employee/0")} label="Novo Funcionário"></Button>
+            </FormButtons>
             <Panel title="Cadastro de funcionários">
                 <form onSubmit={(e) => onFilter(e)}>
                     <ResponsiveGrid columns={2}>
@@ -118,7 +121,6 @@ export default function EmployeePage() {
             </Panel>
             <Panel title="Resultado">
                 <DataTable headers={["Nome", "Departamento", "Cargo", "Data de Admissão", "Ações"]} dataTemaplte={dataTemplate()}></DataTable>
-                <Button type="button" onClick={() => navigate("/personal-administration/employee/0")} label="Novo Funcionário"></Button>
             </Panel>
         </EmployeePageContent>
     )

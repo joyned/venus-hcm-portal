@@ -28,7 +28,7 @@ const GridItem = styled.div`
 
 const ResponsiveGrid = (props: { children: ReactElement[] | ReactElement, columns?: number }) => {
   return (
-    <GridContainer columns={props.columns ? props.columns : 1}>
+    <GridContainer columns={props.columns ? props.columns : 1} style={{ gridTemplateColumns: props.columns === 1 ? 'repeat(auto-fit, minmax(100%, 1fr))' : '' }}>
       {props.children && !Array.isArray(props.children) && (
         props.children
       )}

@@ -16,7 +16,7 @@ const InputField = styled.input<InputProps>`
     padding: 10px 16px;
     margin: 10px 0;
     width: 100%;
-    font-size: 16px;
+    font-size: ${root.textSize};
     color: ${root.textColor};
 `
 

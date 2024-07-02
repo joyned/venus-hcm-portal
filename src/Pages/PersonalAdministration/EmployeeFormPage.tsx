@@ -1,20 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button";
 import FormButtons from "../../Components/FormButtons";
 import FormItem from "../../Components/FormItem";
 import Input from "../../Components/Input";
+import { useLoading } from "../../Components/Loading";
 import Panel from "../../Components/Panel";
 import ResponsiveGrid from "../../Components/ResponsiveGrid";
 import Select from "../../Components/Select";
-import { ContractTypeEnum } from "../../Model/ContractTypeEnum";
-import { GenderTypeEnum } from "../../Model/GenderTypeEnum";
-import { enumToJsonArray } from "../../Utils/GeneralUtils";
+import { CityBaseModel } from "../../Model/CityBaseModel";
+import ContractTypeModel from "../../Model/ContractTypeModel";
+import { EmployeeModel } from "../../Model/EmployeeModel";
+import GenderModel from "../../Model/GenderModel";
+import { RoleModel } from "../../Model/RoleModel";
+import { findAllCities } from "../../Service/CityBaseService";
+import { findAllContractTypes } from "../../Service/ContractTypeService";
+import { findAllGenders } from "../../Service/DiversityAndInclusionService";
+import { findEmployeeById, saveEmployee } from "../../Service/EmployeeService";
+import { findAllRolesByFilter } from "../../Service/RolesAndDepartmentService";
 
 export default function EmployeeFormPage() {
+    const navigate = useNavigate();
+    const params = useParams();
+    const { setLoading } = useLoading();
+
+    const [id, setId] = useState<number | undefined>(undefined)
     const [name, setName] = useState('')
     const [birthdate, setBirthDate] = useState('')
-    const [gender, setGender] = useState<any>('')
+    const [gender, setGender] = useState<GenderModel | undefined>()
     const [maritalStatus, setMaritalStatus] = useState('')
+
+    const [addressId, setAddressId] = useState<number | undefined>(undefined)
     const [street, setStreet] = useState('')
     const [number, setNumber] = useState('')
     const [neighborhood, setNeighborhood] = useState('')
@@ -28,16 +44,15 @@ export default function EmployeeFormPage() {
     const [license, setLicense] = useState('')
     const [passport, setPassport] = useState('')
 
-    const [role, setRole] = useState('')
-    const [department, setDepartment] = useState('')
+    const [role, setRole] = useState<RoleModel>()
     const [admissionDate, setAdmissionDate] = useState('')
     const [employeeNumber, setEmployeeNumber] = useState('')
     const [supervisor, setSupervisor] = useState('')
 
-    const [contractType, setContractType] = useState<any>('')
+    const [contractType, setContractType] = useState<ContractTypeModel>()
     const [workRegime, setWorkRegime] = useState('')
     const [workload, setWorkload] = useState('')
-    const [workplace, setWorkplace] = useState('')
+    const [workplace, setWorkplace] = useState<CityBaseModel>()
 
     const [salary, setSalary] = useState('')
     const [additionals, setAdditionals] = useState('')
@@ -51,15 +66,136 @@ export default function EmployeeFormPage() {
     const [emergencyContactRelationship, setEmergencyContactRelationship] = useState('')
     const [emergencyContactTelephone, setEmergencyContactTelephone] = useState('')
 
+    const [genderOptions, setGenderOptions] = useState<GenderModel[]>([]);
+    const [rolesOptions, setRolesOptions] = useState<RoleModel[]>([]);
+    const [contractTypesOptions, setContractTypesOptions] = useState<ContractTypeModel[]>([]);
+    const [citiesOptions, setCitiesOptions] = useState<CityBaseModel[]>([]);
+
+    useEffect(() => {
+        setId(params.id ? parseInt(params.id) : undefined);
+        setLoading(true);
+        findAllGenders().then((genderResponse) => {
+            setGenderOptions(genderResponse.data);
+
+            findAllRolesByFilter('', 0).then((roleReponse) => {
+                setRolesOptions(roleReponse.data);
+
+                findAllContractTypes().then((contractTypeResponse) => {
+                    setContractTypesOptions(contractTypeResponse.data);
+
+                    findAllCities().then((cityResponse) => {
+                        setCitiesOptions(cityResponse.data);
+
+                        if (id && id !== 0) {
+                            findEmployeeById(id).then((employeeResponse) => {
+                                const employee = employeeResponse.data;
+                                setName(employee.name);
+                                //setBirthDate(new Date(employee.birthdate.getTime()));
+                                setGender(employee.gender)
+                                setMaritalStatus('')
+                                setAddressId(employee.address.id)
+                                setStreet(employee.address.street)
+                                setNumber(employee.address.number.toString())
+                                setNeighborhood(employee.address.neighbourhood)
+                                setCity(employee.address.city)
+                                setEmail(employee.email)
+                                setTelephone(employee.telephone)
+                                setCpf(employee.cpf)
+                                setRg(employee.rg)
+                                setWorkCard(employee.workCard)
+                                setVoterRegistration(employee.voterRegistration)
+                                setLicense(employee.license)
+                                setPassport(employee.passport)
+                                //setAdmissionDate(employee.admissionDate.toISOString().split('T')[0])
+                                setRole(employee.role)
+                                setEmployeeNumber(id ? id.toString() : '')
+                                setSupervisor('')
+                                setContractType(employee.contractType)
+                                setWorkRegime('')
+                                setWorkload(employee.workTime.toString())
+                                setWorkplace(employee.cityBase)
+                                setSalary('')
+                                //setAdditionals(employee.employeeBenefit.additional)
+                                //setBenefits(employee.employeeBenefit.others.toString())
+                                setBank(employee.bankNumber)
+                                setAgency(employee.bankAgency)
+                                setAccount(employee.bankAccount)
+                                if (employee.emergencyContact.length > 0) {
+                                    setEmergencyContactName(employee.emergencyContact[0].name)
+                                    setEmergencyContactRelationship('')
+                                    setEmergencyContactTelephone(employee.emergencyContact[0].telephone)
+                                }
+                                setLoading(false);
+                            });
+                        } else {
+                            setLoading(false);
+                        }
+                    })
+                })
+            })
+        })
+    }, [id, params.id, setLoading])
+
     const onSubmit = (e: any) => {
-        e.preventDefault()
+        e.preventDefault();
+
+        if (gender && role && contractType && workplace) {
+            const employee: EmployeeModel = {
+                id: id,
+                name: name,
+                birthdate: new Date(birthdate),
+                gender: gender,
+                address: {
+                    id: addressId,
+                    street: street,
+                    number: parseInt(number),
+                    neighbourhood: neighborhood,
+                    city: city
+                },
+                email: email,
+                telephone: telephone,
+                cpf: cpf,
+                rg: rg,
+                workCard: workCard,
+                voterRegistration: voterRegistration,
+                license: license,
+                passport: passport,
+                admissionDate: new Date(admissionDate),
+                role: role,
+                contractType: contractType,
+                workTime: parseInt(workload),
+                cityBase: workplace,
+                employeeBenefit: {
+                    id: 0,
+                    additional: parseFloat(additionals),
+                    others: parseFloat(benefits)
+                },
+                bankNumber: bank,
+                bankAgency: agency,
+                bankAccount: account,
+                emergencyContact: [
+                    {
+                        id: 0,
+                        name: emergencyContactName,
+                        telephone: emergencyContactTelephone
+                    }
+                ]
+            }
+
+            setLoading(true);
+            saveEmployee(employee).then(() => {
+                setLoading(false);
+                navigate('/personal-administration/employee')
+            })
+        }
+
     }
 
     return (
         <form onSubmit={(e) => onSubmit(e)}>
             <FormButtons align="end">
                 <Button label="Salvar" type="submit"></Button>
-                <Button label="Cancelar" transparent type="button"></Button>
+                <Button label="Cancelar" transparent type="button" onClick={() => navigate('/personal-administration/employee')}></Button>
             </FormButtons>
 
             <Panel title="Dados Básicos">
@@ -74,7 +210,7 @@ export default function EmployeeFormPage() {
                     </FormItem>
                     <FormItem>
                         <span>Gênero: </span>
-                        <Select value={gender} options={enumToJsonArray(GenderTypeEnum)} onChange={(value) => setGender(value)}></Select>
+                        <Select value={gender} options={genderOptions} onChange={(value) => setGender(value)}></Select>
                     </FormItem>
                     <FormItem>
                         <span>Estado Civil: </span>
@@ -126,7 +262,7 @@ export default function EmployeeFormPage() {
                     </FormItem>
                     <FormItem>
                         <span>Título de Eleitor: </span>
-                        <Input type="email" value={voterRegistration} onChange={(value) => setVoterRegistration(value)}></Input>
+                        <Input type="text" value={voterRegistration} onChange={(value) => setVoterRegistration(value)}></Input>
                     </FormItem>
                     <FormItem>
                         <span>CNH (se houver): </span>
@@ -142,11 +278,11 @@ export default function EmployeeFormPage() {
                 <ResponsiveGrid columns={2}>
                     <FormItem>
                         <span>Cargo/função: </span>
-                        <Input type="text" value={role} onChange={(value) => setRole(value)}></Input>
+                        <Select options={rolesOptions} value={role} onChange={(value) => setRole(value)}></Select>
                     </FormItem>
                     <FormItem>
                         <span>Departamento/setor: </span>
-                        <Input type="text" value={department} onChange={(value) => setDepartment(value)}></Input>
+                        <Input type="text" value={role?.department.name} disabled></Input>
                     </FormItem>
                     <FormItem>
                         <span>Data de admissão: </span>
@@ -154,7 +290,7 @@ export default function EmployeeFormPage() {
                     </FormItem>
                     <FormItem>
                         <span>Matrícula do funcionário: </span>
-                        <Input type="text" value={employeeNumber} onChange={(value) => setEmployeeNumber(value)}></Input>
+                        <Input type="text" value={employeeNumber} onChange={(value) => setEmployeeNumber(value)} disabled></Input>
                     </FormItem>
                     <FormItem>
                         <span>Supervisor imediato: </span>
@@ -166,7 +302,7 @@ export default function EmployeeFormPage() {
                 <ResponsiveGrid columns={2}>
                     <FormItem>
                         <span>Tipo de contrato: </span>
-                        <Select value={contractType} options={enumToJsonArray(ContractTypeEnum)} onChange={(value) => setContractType(value)}></Select>
+                        <Select value={contractType} options={contractTypesOptions} onChange={(value) => setContractType(value)}></Select>
                     </FormItem>
                     <FormItem>
                         <span>Regime de trabalho: </span>
@@ -178,7 +314,7 @@ export default function EmployeeFormPage() {
                     </FormItem>
                     <FormItem>
                         <span>Local de trabalho: </span>
-                        <Input type="text" value={workplace} onChange={(value) => setWorkplace(value)}></Input>
+                        <Select value={workplace} options={citiesOptions} optionLabel="city" onChange={(value) => setWorkplace(value)}></Select>
                     </FormItem>
                 </ResponsiveGrid>
             </Panel>

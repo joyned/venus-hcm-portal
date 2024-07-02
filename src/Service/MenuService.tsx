@@ -6,7 +6,6 @@ const hcmMenu: VenusHCMMenu[] = [
         subMenu: [
             { name: "Cadastro de cargos", uri: "/roles-and-departments/role", subMenu: [] },
             { name: "Cadastro de departamentos", uri: "/roles-and-departments/department", subMenu: [] },
-            { name: "Histórico de cargos e funções", uri: "/roles-and-departments/functions-history", subMenu: [] },
         ]
     },
     {

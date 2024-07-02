@@ -63,9 +63,9 @@ export default function RoleFormPage() {
                 active: active
             }
 
-            saveRole(role).then(response => {
-                navigate(`/roles-and-departments/role/${response.data.id}`);
+            saveRole(role).then(() => {
                 setLoading(false);
+                navigate(`/roles-and-departments/role`);
             });
         }
 

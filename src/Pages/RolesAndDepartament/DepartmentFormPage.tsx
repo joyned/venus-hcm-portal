@@ -51,7 +51,7 @@ export default function DepartmentFormPage() {
             .then((response: AxiosResponse<DepartmentModel>) => {
                 setId(Number(response.data.id));
                 setLoading(false);
-                navigate(`/roles-and-departments/department/${response.data.id}`)
+                navigate(`/roles-and-departments/department`)
             })
     }
 

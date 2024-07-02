@@ -37,7 +37,15 @@ const SelectOption = styled.option`
     }
 `
 
-export default function Select(props: { options?: any[], optionLabel?: string, value?: any, onChange?: (e: any) => void, style?: CSSProperties, required?: boolean }) {
+export default function Select(props: {
+    options?: any[],
+    optionLabel?: string,
+    value?: any,
+    onChange?: (e: any) => void,
+    style?: CSSProperties,
+    required?: boolean,
+    disabled?: boolean
+}) {
     const [selectedValue, setSelectedValue] = useState<string | undefined>("");
 
     useEffect(() => {
@@ -66,7 +74,8 @@ export default function Select(props: { options?: any[], optionLabel?: string, v
             <SelectComponent
                 style={props.style}
                 value={selectedValue}
-                onChange={handleChange}>
+                onChange={handleChange}
+                disabled={props.disabled}>
                 <SelectOption value=""> -- select an option -- </SelectOption>
                 {props.options && props.options.map((option, index) =>
                     <SelectOption key={index} value={index}>{option[`${props.optionLabel ? props.optionLabel : 'name'}`]}</SelectOption>

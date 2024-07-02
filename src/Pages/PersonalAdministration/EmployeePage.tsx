@@ -1,59 +1,113 @@
+import { useEffect, useState } from "react"
+import { FaEdit } from "react-icons/fa"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import Button from "../../Components/Button"
 import FormButtons from "../../Components/FormButtons"
 import FormItem from "../../Components/FormItem"
 import Input from "../../Components/Input"
+import { useLoading } from "../../Components/Loading"
 import Panel from "../../Components/Panel"
 import ResponsiveGrid from "../../Components/ResponsiveGrid"
-import { Table, TableBody, TableData, TableHeader, TableHeaderValue, TableRow } from "../../Components/Table"
-import { useNavigate } from "react-router-dom"
+import Select from "../../Components/Select"
+import DataTable, { TableData, TableRow } from "../../Components/Table"
+import { CityBaseModel } from "../../Model/CityBaseModel"
+import { DepartmentModel } from "../../Model/DepartmentModel"
+import { EmployeeModel } from "../../Model/EmployeeModel"
+import { RoleModel } from "../../Model/RoleModel"
+import { findAllCities } from "../../Service/CityBaseService"
+import { findEmployeeByFilter } from "../../Service/EmployeeService"
+import { findAllDepartmentsByFilter, findAllRolesByFilter } from "../../Service/RolesAndDepartmentService"
 
 const EmployeePageContent = styled.div``
 
-const tempData = [
-    {
-        name: "João da Silva",
-        department: "TI",
-        role: "Desenvolvedor",
-        admissionDate: "01/01/2020"
-    },
-    {
-        name: "Maria da Silva",
-        department: "TI",
-        role: "Desenvolvedor",
-        admissionDate: "01/01/2020"
-    },
-    {
-        name: "José da Silva",
-        department: "TI",
-        role: "Desenvolvedor",
-        admissionDate: "01/01/2020"
-    }
-]
-
 export default function EmployeePage() {
+    const { setLoading } = useLoading();
     const navigate = useNavigate();
+
+    const [employees, setEmployees] = useState<EmployeeModel[]>([]);
+
+    const [name, setName] = useState<string>("");
+    const [role, setRole] = useState<RoleModel | undefined>(undefined);
+    const [department, setDepartment] = useState<DepartmentModel | undefined>(undefined);
+    const [city, setCity] = useState<CityBaseModel | undefined>(undefined);
+    const [admissionDate, setAdmissionDate] = useState<string>("");
+
+    const [roleOptions, setRoleOptions] = useState<RoleModel[]>([]);
+    const [departmentOptions, setDepartmentOptions] = useState<DepartmentModel[]>([]);
+    const [cityOptions, setCityOptions] = useState<CityBaseModel[]>([]);
+
+    useEffect(() => {
+        setLoading(true);
+        findAllDepartmentsByFilter('').then((response) => {
+            setDepartmentOptions(response.data);
+            findAllCities().then((response) => {
+                setCityOptions(response.data);
+                setLoading(false);
+            });
+        });
+    }, [setLoading]);
+
+    const onFilter = (e: any) => {
+        e.preventDefault();
+        setLoading(true);
+        findEmployeeByFilter(name, role?.id, department?.id, city?.id).then((response) => {
+            setEmployees(response.data);
+            setLoading(false);
+        });
+    }
+
+    const onDepartmentSelect = (value: any) => {
+        setDepartment(value);
+        setLoading(true);
+        findAllRolesByFilter('', value.id).then((response) => {
+            setRoleOptions(response.data);
+            setLoading(false);
+        });
+    }
+
+    const dataTemplate = () => {
+        return (
+            employees.map((item, index) => {
+                return (
+                    <TableRow key={index}>
+                        <TableData>{item.name}</TableData>
+                        <TableData>{item.role.department.name}</TableData>
+                        <TableData>{item.role.name}</TableData>
+                        <TableData>{String(item.admissionDate)}</TableData>
+                        <TableData>
+                            <FaEdit onClick={() => navigate(`/personal-administration/employee/${item.id}`)}></FaEdit>
+                        </TableData>
+                    </TableRow>
+                )
+            })
+        )
+    }
 
     return (
         <EmployeePageContent>
             <Panel title="Cadastro de funcionários">
-                <form>
+                <form onSubmit={(e) => onFilter(e)}>
                     <ResponsiveGrid columns={2}>
                         <FormItem>
                             <label>Nome</label>
-                            <Input type="text"></Input>
+                            <Input type="text" value={name} onChange={(value) => setName(value)}></Input>
+                        </FormItem>
+                        <FormItem>
+                            <label>Cidade</label>
+                            <Select value={city} options={cityOptions} optionLabel="city" onChange={(value) => setCity(value)}></Select>
                         </FormItem>
                         <FormItem>
                             <label>Departamento</label>
-                            <Input type="text"></Input>
+                            <Select value={department} options={departmentOptions} onChange={(value) => onDepartmentSelect(value)}></Select>
                         </FormItem>
                         <FormItem>
                             <label>Cargo</label>
-                            <Input type="text"></Input>
+                            <Select value={role} options={roleOptions} onChange={(value) => setRole(value)} disabled={!department}></Select>
                         </FormItem>
                         <FormItem>
                             <label>Data de Admissão</label>
-                            <Input type="text"></Input>
+                            <Input type="date" value={admissionDate} onChange={(value) => setAdmissionDate(value)}></Input>
                         </FormItem>
                     </ResponsiveGrid>
                     <FormButtons>
@@ -63,28 +117,7 @@ export default function EmployeePage() {
                 </form>
             </Panel>
             <Panel title="Resultado">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHeaderValue>Nome</TableHeaderValue>
-                            <TableHeaderValue>Departamento</TableHeaderValue>
-                            <TableHeaderValue>Cargo</TableHeaderValue>
-                            <TableHeaderValue>Data de Admissão</TableHeaderValue>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {tempData.map((item, index) => {
-                            return (
-                                <TableRow key={index}>
-                                    <TableData>{item.name}</TableData>
-                                    <TableData>{item.department}</TableData>
-                                    <TableData>{item.role}</TableData>
-                                    <TableData>{item.admissionDate}</TableData>
-                                </TableRow>
-                            )
-                        })}
-                    </TableBody>
-                </Table>
+                <DataTable headers={["Nome", "Departamento", "Cargo", "Data de Admissão", "Ações"]} dataTemaplte={dataTemplate()}></DataTable>
                 <Button type="button" onClick={() => navigate("/personal-administration/employee/0")} label="Novo Funcionário"></Button>
             </Panel>
         </EmployeePageContent>

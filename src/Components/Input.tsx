@@ -25,7 +25,8 @@ export default function Input(props: {
     value?: string, type?: 'text' | 'password' | 'date' | 'number' | 'email' | 'textarea',
     onChange?: (value: string) => void,
     transparent?: boolean,
-    style?: React.CSSProperties
+    style?: React.CSSProperties,
+    disabled?: boolean
 }) {
     return (
         <InputComponent>
@@ -35,6 +36,7 @@ export default function Input(props: {
                 onChange={(e) => { props.onChange && props.onChange(e.target.value) }}
                 transsparent={props.transparent}
                 style={props.style}
+                disabled={props.disabled}
             >
             </InputField>
         </InputComponent>

@@ -1,14 +1,16 @@
-import { AddressModel } from "./AddressModel";
-import { CityBaseModel } from "./CityBaseModel";
-import { EmergencyContactModel } from "./EmergencyContactModel";
-import { EmployeeBenefitModel } from "./EmployeeBenefitModel";
-import { RoleModel } from "./RoleModel";
+import { AddressModel } from './AddressModel';
+import { CityBaseModel } from './CityBaseModel';
+import ContractTypeModel from './ContractTypeModel';
+import { EmergencyContactModel } from './EmergencyContactModel';
+import { EmployeeBenefitModel } from './EmployeeBenefitModel';
+import GenderModel from './GenderModel';
+import { RoleModel } from './RoleModel';
 
 export interface EmployeeModel {
-  id: number;
+  id?: number;
   name: string;
   birthdate: Date;
-  gender: 'MALE' | 'FEMALE' | 'OTHER';
+  gender: GenderModel;
   address: AddressModel;
   email: string;
   telephone: string;
@@ -20,7 +22,7 @@ export interface EmployeeModel {
   passport: string;
   admissionDate: Date;
   role: RoleModel;
-  contractType: 'CLT' | 'PJ' | 'Freelancer' | 'Intern';
+  contractType: ContractTypeModel;
   workTime: number;
   cityBase: CityBaseModel;
   employeeBenefit: EmployeeBenefitModel;

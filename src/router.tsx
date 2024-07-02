@@ -10,12 +10,38 @@ import RolePublishingFormPage from "./Pages/Recruitment/RolePublishingFormPage";
 import ResumeScreeningPage from "./Pages/Recruitment/ResumeScreeningPage";
 import InterviewManagementPage from "./Pages/Recruitment/InterviewManagementPage";
 import EmployeeOnboardingPage from "./Pages/Recruitment/EmployeeOnboardingPage";
+import LoginPage from "./Pages/LoginPage";
+import RolePage from "./Pages/RolesAndDepartament/RolePage";
+import RoleFormPage from "./Pages/RolesAndDepartament/RoleFormPage";
+import DepartmentPage from "./Pages/RolesAndDepartament/DepartmentPage";
+import DepartmentFormPage from "./Pages/RolesAndDepartament/DepartmentFormPage";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root></Root>
+        element: <LoginPage></LoginPage>
+    },
+    {
+        path: "job-and-departments",
+        children: [
+            {
+                path: "job",
+                element: <Root><RolePage></RolePage></Root>
+            },
+            {
+                path: "job/:id",
+                element: <Root><RoleFormPage></RoleFormPage></Root>
+            },
+            {
+                path: "department",
+                element: <Root><DepartmentPage></DepartmentPage></Root>
+            },
+            {
+                path: "department/:id",
+                element: <Root><DepartmentFormPage></DepartmentFormPage></Root>
+            }
+        ]
     },
     {
         path: "/personal-administration",

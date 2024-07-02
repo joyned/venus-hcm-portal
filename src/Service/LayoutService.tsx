@@ -2,6 +2,14 @@ import VenusHCMMenu from "../Model/VenusHCMMenu";
 
 const hcmMenu: VenusHCMMenu[] = [
     {
+        name: "Cargo e Departamentos",
+        subMenu: [
+            { name: "Cadastro de cargos", uri: "/job-and-departments/job", subMenu: [] },
+            { name: "Cadastro de departamentos", uri: "/job-and-departments/department", subMenu: [] },
+            { name: "Histórico de cargos e funções", uri: "/job-and-departments/functions-history", subMenu: [] },
+        ]
+    },
+    {
         name: "Administração de Pessoal",
         subMenu: [
             { name: "Cadastro de funcionários", uri: "/personal-administration/employee", subMenu: [] },

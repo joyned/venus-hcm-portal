@@ -8,6 +8,7 @@ import { ReactElement, useState } from "react";
 import { hcmMenu } from "../Service/LayoutService";
 import VenusHCMMenu from "../Model/VenusHCMMenu";
 import { useNavigate } from "react-router-dom";
+import Loading, { useLoading } from "../Components/Loading";
 
 const RootLayout = styled.div`
     background-color: ${root.backgroundColor};
@@ -88,6 +89,7 @@ const MainContent = styled.div`
 `;
 
 export default function Root(props: { children?: ReactElement }) {
+    const { loading } = useLoading();
     const navigate = useNavigate();
     const [latestMenu, setLatestMenu] = useState<VenusHCMMenu[] | undefined>(undefined);
     const [currentMenu, setCurrentMenu] = useState<VenusHCMMenu[]>(hcmMenu);
@@ -113,40 +115,42 @@ export default function Root(props: { children?: ReactElement }) {
 
     return (
         <RootLayout>
-            <TopBar>
-                <TopBarItems>
-                    <TopBarItem onClick={() => setMenuOpen(!menuOpen)}>
-                        <FiMenu></FiMenu>
-                    </TopBarItem>
-                    <TopBarItem>
-                        <TopBarItemAppName>
-                            Venus HCM
-                        </TopBarItemAppName>
-                    </TopBarItem>
-                    <TopBarItem>
-                        <FaRegUser />
-                    </TopBarItem>
-                </TopBarItems>
-            </TopBar>
-            <LeftSideMenu style={{ display: menuOpen ? 'flex' : 'none' }}>
-                {latestMenu && (
-                    <LeftSideMenuBackButton onClick={() => backMenu()}>
-                        <IoIosArrowRoundBack />
-                        Voltar
-                    </LeftSideMenuBackButton>
-                )}
-                {currentMenu.map((item, index) => {
-                    return (
-                        <LeftSideMenuItem onClick={() => changeMenu(item)} key={index}>
-                            {item.name}
-                            {item.subMenu.length > 0 && <FaCaretRight />}
-                        </LeftSideMenuItem>
-                    )
-                })}
-            </LeftSideMenu>
-            <MainContent style={{ marginLeft: menuOpen ? '240px' : '0' }}>
-                {props.children}
-            </MainContent>
+            <Loading isLoading={loading}>
+                <TopBar>
+                    <TopBarItems>
+                        <TopBarItem onClick={() => setMenuOpen(!menuOpen)}>
+                            <FiMenu></FiMenu>
+                        </TopBarItem>
+                        <TopBarItem>
+                            <TopBarItemAppName>
+                                Venus HCM
+                            </TopBarItemAppName>
+                        </TopBarItem>
+                        <TopBarItem>
+                            <FaRegUser />
+                        </TopBarItem>
+                    </TopBarItems>
+                </TopBar>
+                <LeftSideMenu style={{ display: menuOpen ? 'flex' : 'none' }}>
+                    {latestMenu && (
+                        <LeftSideMenuBackButton onClick={() => backMenu()}>
+                            <IoIosArrowRoundBack />
+                            Voltar
+                        </LeftSideMenuBackButton>
+                    )}
+                    {currentMenu.map((item, index) => {
+                        return (
+                            <LeftSideMenuItem onClick={() => changeMenu(item)} key={index}>
+                                {item.name}
+                                {item.subMenu.length > 0 && <FaCaretRight />}
+                            </LeftSideMenuItem>
+                        )
+                    })}
+                </LeftSideMenu>
+                <MainContent style={{ marginLeft: menuOpen ? '240px' : '0' }}>
+                    {props.children}
+                </MainContent>
+            </Loading>
         </RootLayout>
     );
 }

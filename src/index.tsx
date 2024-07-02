@@ -5,14 +5,17 @@ import GlobalStyles from './Components/GlobalStyles';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import router from './router';
+import { LoadingProvider } from './Components/Loading';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <GlobalStyles></GlobalStyles>
-    <RouterProvider router={router} />
+    <LoadingProvider>
+      <GlobalStyles></GlobalStyles>
+      <RouterProvider router={router} />
+    </LoadingProvider>
   </React.StrictMode>
 );
 

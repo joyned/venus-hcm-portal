@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import styled from 'styled-components';
 
 interface GridContainerProps {
-    columns: number;
+  columns: number;
 }
 
 const GridContainer = styled.div <GridContainerProps> `
@@ -26,14 +26,17 @@ const GridContainer = styled.div <GridContainerProps> `
 const GridItem = styled.div`
 `;
 
-const ResponsiveGrid = (props: { children: ReactElement[], columns?: number }) => {
-    return (
-        <GridContainer columns={props.columns ? props.columns : 1}>
-            {props.children && props.children.map((item, index) => (
-                <GridItem key={index}>{item}</GridItem>
-            ))}
-        </GridContainer>
-    );
+const ResponsiveGrid = (props: { children: ReactElement[] | ReactElement, columns?: number }) => {
+  return (
+    <GridContainer columns={props.columns ? props.columns : 1}>
+      {props.children && !Array.isArray(props.children) && (
+        props.children
+      )}
+      {props.children && Array.isArray(props.children) && props.children.map((item, index) => (
+        <GridItem key={index}>{item}</GridItem>
+      ))}
+    </GridContainer>
+  );
 };
 
 export default ResponsiveGrid;

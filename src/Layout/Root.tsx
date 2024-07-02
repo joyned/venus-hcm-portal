@@ -50,7 +50,7 @@ const TopBarItemAppName = styled.span`
 const LeftSideMenu = styled.div`
     background-color: ${leftSideMenu.backgroundColor};
     color: ${leftSideMenu.color};
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 25px;
     position: fixed;
@@ -58,6 +58,8 @@ const LeftSideMenu = styled.div`
     min-width: 240px;
     max-width: 240px;
     padding: 15px;
+    opacity:0;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
 `
 
 const LeftSideMenuItem = styled.div`
@@ -131,7 +133,7 @@ export default function Root(props: { children?: ReactElement }) {
                         </TopBarItem>
                     </TopBarItems>
                 </TopBar>
-                <LeftSideMenu style={{ display: menuOpen ? 'flex' : 'none' }}>
+                <LeftSideMenu style={{ visibility: menuOpen ? 'visible' : 'hidden', opacity: menuOpen ? '1' : '0' }}>
                     {latestMenu && (
                         <LeftSideMenuBackButton onClick={() => backMenu()}>
                             <IoIosArrowRoundBack />

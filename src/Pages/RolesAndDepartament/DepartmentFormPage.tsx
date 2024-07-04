@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button";
 import FormButtons from "../../Components/FormButtons";
 import FormItem from "../../Components/FormItem";
 import Input from "../../Components/Input";
+import { useLoading } from "../../Components/Loading";
 import Panel from "../../Components/Panel";
 import ResponsiveGrid from "../../Components/ResponsiveGrid";
 import TextArea from "../../Components/TextArea";
+import Toast from "../../Components/Toast";
 import { DepartmentModel } from "../../Model/DepartmentModel";
 import { findDepartmentById, saveDepartment } from "../../Service/DepartmentService";
-import { useNavigate, useParams } from "react-router-dom";
-import { AxiosResponse } from "axios";
-import { useLoading } from "../../Components/Loading";
 
 export default function DepartmentFormPage() {
+    const toast = useRef<any>(null);
     const { setLoading } = useLoading();
     const params = useParams()
     const navigate = useNavigate();
@@ -31,7 +33,10 @@ export default function DepartmentFormPage() {
                     setDescription(response.data.description);
                     setCreatedAt(response.data.createdAt);
                     setLoading(false);
-                })
+                }).catch((error) => {
+                    toast.current.showError('Error', `Erro ao buscar departamento: ${error.status} - ${error}`, 'error');
+                    setLoading(false);
+                });
         }
     }, [params.id, setLoading]);
 
@@ -52,11 +57,15 @@ export default function DepartmentFormPage() {
                 setId(Number(response.data.id));
                 setLoading(false);
                 navigate(`/roles-and-departments/department`)
-            })
+            }).catch((error) => {
+                toast.current.showError('Error', `Erro ao salvar departamento: ${error.status} - ${error}`, 'error');
+                setLoading(false);
+            });
     }
 
     return (
         <form onSubmit={(e) => onSubmit(e)}>
+            <Toast ref={toast}></Toast>
             <FormButtons align="end">
                 <Button label="Salvar" type="submit"></Button>
                 <Button label="Voltar" transparent type="button" onClick={() => navigate(`/roles-and-departments/department`)}></Button>

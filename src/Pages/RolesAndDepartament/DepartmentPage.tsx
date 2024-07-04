@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button";
@@ -11,8 +11,10 @@ import ResponsiveGrid from "../../Components/ResponsiveGrid";
 import DataTable, { TableData, TableRow } from "../../Components/Table";
 import { DepartmentModel } from "../../Model/DepartmentModel";
 import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
+import Toast from "../../Components/Toast";
 
 export default function DepartmentPage() {
+    const toast = useRef<any>(null);
     const { setLoading } = useLoading();
     const navigate = useNavigate();
     const [filterName, setFilterName] = useState("");
@@ -26,7 +28,10 @@ export default function DepartmentPage() {
             .then((response) => {
                 setDepartments(response.data);
                 setLoading(false)
-            });
+            }).catch((error) => {
+                toast.current.showError('Error', `Erro ao buscar departamentos: ${error.status} - ${error}`, 'error');
+                setLoading(false);
+            });;
     }
 
     const dataTemplate = () => {
@@ -45,6 +50,7 @@ export default function DepartmentPage() {
 
     return (
         <>
+            <Toast ref={toast}></Toast>
             <FormButtons align="end">
                 <Button label="Adicionar departamento" onClick={() => navigate("/roles-and-departments/department/0")}></Button>
             </FormButtons>

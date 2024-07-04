@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button";
 import FormButtons from "../../Components/FormButtons";
@@ -14,8 +14,10 @@ import { DepartmentModel } from "../../Model/DepartmentModel";
 import { RoleModel } from "../../Model/RoleModel";
 import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
 import { findRoleById, saveRole } from "../../Service/RoleService";
+import Toast from "../../Components/Toast";
 
 export default function RoleFormPage() {
+    const toast = useRef<any>(null);
     const params = useParams();
     const navigate = useNavigate();
     const { setLoading } = useLoading();
@@ -43,10 +45,16 @@ export default function RoleFormPage() {
                     setActive(response.data.active);
                     setCreatedAt(response.data.createdAt);
                     setLoading(false);
+                }).catch((error) => {
+                    toast.current.showError('Error', `Erro ao buscar cargo: ${error.status} - ${error}`, 'error');
+                    setLoading(false);
                 });
             } else {
                 setLoading(false);
             }
+        }).catch((error) => {
+            toast.current.showError('Error', `Erro ao buscar departamentos: ${error.status} - ${error}`, 'error');
+            setLoading(false);
         });
     }, [params.id, roleId, setLoading]);
 
@@ -67,13 +75,19 @@ export default function RoleFormPage() {
             saveRole(role).then(() => {
                 setLoading(false);
                 navigate(`/roles-and-departments/role`);
+            }).catch((error) => {
+                toast.current.showError('Error', `Erro ao salvar cargo: ${error.status} - ${error}`, 'error');
+                setLoading(false);
             });
+        } else {
+            toast.current.showError('Error', 'Preencha todos os campos obrigatórios!', 'error');
         }
 
     }
 
     return (
         <form onSubmit={(e) => onSubmit(e)}>
+            <Toast ref={toast}></Toast>
             <FormButtons align="end">
                 <Button label="Salvar" type="submit"></Button>
                 <Button label="Voltar" transparent type="button" onClick={() => navigate("/roles-and-departments/role")}></Button>

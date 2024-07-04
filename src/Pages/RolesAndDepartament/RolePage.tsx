@@ -48,7 +48,10 @@ export default function RolePage() {
             .then(response => {
                 setRoles(response.data);
                 setLoading(false);
-            });
+            }).catch((error) => {
+                toast.current.showError('Error', `Erro ao buscar cargos: ${error.status} - ${error}`, 'error');
+                setLoading(false);
+            })
     }
 
     const dataTemplate = () => {

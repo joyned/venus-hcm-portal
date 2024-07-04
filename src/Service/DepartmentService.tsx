@@ -1,8 +1,9 @@
 import axios from "axios";
 import { DepartmentModel } from "../Model/DepartmentModel";
+import { GET } from "./HttpService";
 
 const findAllDepartmentsByFilter = (name: string) => {
-    return axios.get<DepartmentModel[]>(`${process.env.REACT_APP_API_URL}/department/filter?name=${name}`);
+    return GET(`/department/filter?name=${name}`);
 }
 
 const findDepartmentById = (id: number) => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button";
@@ -14,10 +14,12 @@ import { DepartmentModel } from "../../Model/DepartmentModel";
 import { RoleModel } from "../../Model/RoleModel";
 import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
 import { findAllRolesByFilter } from "../../Service/RoleService";
+import Toast from "../../Components/Toast";
 
 
 export default function RolePage() {
     const { setLoading } = useLoading();
+    const toast = useRef<any>(null);
     const navigate = useNavigate();
 
     const [departamentOptions, setDepartamentOptions] = useState<DepartmentModel[]>([]);
@@ -29,10 +31,14 @@ export default function RolePage() {
 
     useEffect(() => {
         setLoading(true);
-        findAllDepartmentsByFilter("").then(response => {
-            setDepartamentOptions(response.data);
-            setLoading(false);
-        });
+        findAllDepartmentsByFilter("")
+            .then(response => {
+                setDepartamentOptions(response.data);
+                setLoading(false);
+            }).catch((error) => {
+                toast.current.showError('Error', `Erro ao buscar departamentos: ${error.status} - ${error}`, 'error');
+                setLoading(false);
+            });
     }, [setLoading]);
 
     const onFilter = (e: any) => {
@@ -61,6 +67,7 @@ export default function RolePage() {
 
     return (
         <>
+            <Toast ref={toast}></Toast>
             <FormButtons align="end">
                 <Button label="Adicionar cargo" onClick={() => navigate("/roles-and-departments/role/0")}></Button>
             </FormButtons>

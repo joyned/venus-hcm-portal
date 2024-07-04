@@ -3,6 +3,10 @@ export const root = {
     primaryColor: "#384b73",
     secondaryColor: "#2b2b2b",
     backgroundColor: "#f0f0f0",
+    success: '#28a745',
+    info: '#17a2b8',
+    warning: '#ffc107',
+    danger: '#dc3545',
     textColor: "#676767",
     textSize: "13px",
     titleSize: "15px"

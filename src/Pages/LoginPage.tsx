@@ -5,6 +5,7 @@ import FormItem from "../Components/FormItem"
 import Input from "../Components/Input"
 import { root } from "../Components/UI/Variables"
 import VenusHCMLogo from "../Components/VenusHCMLogo"
+import { useNavigate } from "react-router-dom"
 
 const LoginPageContainer = styled.div`
     height: 100vh;
@@ -55,6 +56,8 @@ const ForgotPassword = styled.a`
 
 
 export default function LoginPage() {
+    const navigate = useNavigate();
+
     return (
         <LoginPageContainer>
             <LoginPageContent>
@@ -69,7 +72,7 @@ export default function LoginPage() {
                         <Input type="password" style={{ color: "white" }} transparent></Input>
                     </FormItem>
                     <FormButtons style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Button label="Entrar" size="large"></Button>
+                        <Button type="submit" label="Entrar" size="large" onClick={() => navigate('/home')}></Button>
                         <ForgotPassword>Esqueceu sua senha?</ForgotPassword>
                     </FormButtons>
                 </LoginPageForm>

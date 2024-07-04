@@ -15,12 +15,17 @@ import RolePage from "./Pages/RolesAndDepartament/RolePage";
 import RoleFormPage from "./Pages/RolesAndDepartament/RoleFormPage";
 import DepartmentPage from "./Pages/RolesAndDepartament/DepartmentPage";
 import DepartmentFormPage from "./Pages/RolesAndDepartament/DepartmentFormPage";
+import HomePage from "./Pages/HomePage";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <LoginPage></LoginPage>
+    },
+    {
+        path: "/home",
+        element: <Root><HomePage></HomePage></Root>
     },
     {
         path: "roles-and-departments",

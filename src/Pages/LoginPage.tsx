@@ -38,7 +38,7 @@ const LoginPageForm = styled.form`
         margin-bottom: 30px;
     }
 
-    @media (max-width: 610px) {
+    @media (max-width: 733px) {
         padding: 50px;
     }
 `

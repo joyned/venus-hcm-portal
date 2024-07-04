@@ -1,14 +1,14 @@
-import { FaRegUser } from "react-icons/fa";
-import { FiMenu } from "react-icons/fi";
-import { FaCaretRight } from "react-icons/fa";
-import { IoIosArrowRoundBack } from "react-icons/io";
-import styled from "styled-components";
-import { leftSideMenu, root, topMenu } from "../Components/UI/Variables";
 import { ReactElement, useState } from "react";
-import { hcmMenu } from "../Service/MenuService";
-import VenusHCMMenu from "../Model/VenusHCMMenu";
+import { FaCaretRight, FaRegUser } from "react-icons/fa";
+import { FiMenu } from "react-icons/fi";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import Loading, { useLoading } from "../Components/Loading";
+import { leftSideMenu, root, topMenu } from "../Components/UI/Variables";
+import VenusHCMLogo from "../Components/VenusHCMLogo";
+import VenusHCMMenu from "../Model/VenusHCMMenu";
+import { hcmMenu } from "../Service/MenuService";
 
 const RootLayout = styled.div`
     background-color: ${root.backgroundColor};
@@ -19,6 +19,7 @@ const TopBar = styled.div`
     position: fixed;
     top: 0;
     width: 100%;
+    max-height: 45px;
     background-color: ${topMenu.backgroundColor};
     color: ${topMenu.color};
     display: flex;
@@ -39,12 +40,6 @@ const TopBarItem = styled.div`
     svg {
         cursor: pointer;
     }
-`
-
-const TopBarItemAppName = styled.span`
-    font-family: "Bona Nova SC", serif;
-    font-size: large;
-    color: white;
 `
 
 const LeftSideMenu = styled.div`
@@ -131,9 +126,7 @@ export default function Root(props: { children?: ReactElement }) {
                             <FiMenu></FiMenu>
                         </TopBarItem>
                         <TopBarItem>
-                            <TopBarItemAppName>
-                                Venus HCM
-                            </TopBarItemAppName>
+                            <VenusHCMLogo width="160px" />
                         </TopBarItem>
                         <TopBarItem>
                             <FaRegUser />

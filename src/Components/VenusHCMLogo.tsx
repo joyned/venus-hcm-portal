@@ -1,16 +1,13 @@
 import styled from "styled-components";
 
-const VenusHCMLogoComponent = styled.h1`
-    font-family: "Bona Nova SC", serif;
-    font-size: large;
+const VenusHCMLogoComponent = styled.img`
+    width: 500px;
     color: white;
-    text-align: center;
+    margin: 20px 0;
 `
 
-export default function VenusHCMLogo() {
+export default function VenusHCMLogo(props: { width?: string }) {
     return (
-        <VenusHCMLogoComponent>
-            Venus HCM
-        </VenusHCMLogoComponent>
+        <VenusHCMLogoComponent src="/logo-white.svg" alt="Venus HCM" style={{ width: props.width ?? '500px' }}></VenusHCMLogoComponent>
     )
 }

@@ -1,28 +1,56 @@
 import styled from "styled-components"
-import FormItem from "../Components/FormItem"
-import FormButtons from "../Components/FormButtons"
 import Button from "../Components/Button"
-import { root } from "../Components/UI/Variables"
+import FormButtons from "../Components/FormButtons"
+import FormItem from "../Components/FormItem"
 import Input from "../Components/Input"
+import { root } from "../Components/UI/Variables"
+import VenusHCMLogo from "../Components/VenusHCMLogo"
 
 const LoginPageContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     background-color: ${root.secondaryColor};
 `
 
 const LoginPageContent = styled.div`
-    background-color: ${root.primaryColor};
-    color: 'white';
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    max-width: 100%;
-    margin: 0 20px;
-    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    justify-content: flex-end;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("/login-page-image.jpg");
+
+    @media (max-width: 1154px) {
+        background: none;
+        justify-content: center;
+    }
+`
+
+const LoginPageForm = styled.form`
+    background-color: ${root.secondaryColor};
+    padding: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+        font-size: 75px;
+        margin-bottom: 30px;
+    }
+
+    @media (max-width: 610px) {
+        padding: 50px;
+    }
+`
+
+const ForgotPassword = styled.a`
+    color: white;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+        color: #f0f0f0;
+    }
 `
 
 
@@ -30,7 +58,8 @@ export default function LoginPage() {
     return (
         <LoginPageContainer>
             <LoginPageContent>
-                <form>
+                <LoginPageForm>
+                    <VenusHCMLogo></VenusHCMLogo>
                     <FormItem>
                         <label style={{ color: "white" }}>Usuário</label>
                         <Input type="text" style={{ color: "white" }} transparent></Input>
@@ -39,10 +68,11 @@ export default function LoginPage() {
                         <label style={{ color: "white" }}>Senha</label>
                         <Input type="password" style={{ color: "white" }} transparent></Input>
                     </FormItem>
-                    <FormButtons>
-                        <Button label="Entrar"></Button>
+                    <FormButtons style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Button label="Entrar" size="large"></Button>
+                        <ForgotPassword>Esqueceu sua senha?</ForgotPassword>
                     </FormButtons>
-                </form>
+                </LoginPageForm>
             </LoginPageContent>
         </LoginPageContainer>
     )

@@ -3,6 +3,7 @@ import { root } from "./UI/Variables";
 
 interface ButtonComponentProps {
     $transparent?: boolean;
+    $size?: 'normal' | 'large' | 'x-large';
 }
 
 const ButtonComponent = styled.div<ButtonComponentProps>`
@@ -21,13 +22,23 @@ const ButtonAction = styled.button<ButtonComponentProps>`
     border: none;
     background-color: transparent;
     color: ${props => props.$transparent ? root.textColor : "white"};
-    font-size: ${root.textSize};
+    font-size: ${props => props.$size ? props.$size : root.textSize};
     cursor: pointer;
 `
 
-export default function Button(props: { label?: string, type?: 'submit' | 'reset' | 'button', transparent?: boolean, onClick?: () => void }) {
+export default function Button(props: {
+    label?: string,
+    type?: 'submit' | 'reset' | 'button',
+    transparent?: boolean,
+    size?: 'normal' | 'large' | 'x-large',
+    onClick?: () => void
+}) {
+
     return (
-        <ButtonAction type={props.type ?? 'button'} $transparent={props.transparent ? true : undefined} onClick={() => props.onClick && props.onClick()}>
+        <ButtonAction type={props.type ?? 'button'}
+            $transparent={props.transparent ? true : undefined}
+            $size={props.size}
+            onClick={() => props.onClick && props.onClick()}>
             <ButtonComponent $transparent={props.transparent ? true : undefined}>
                 {props.label}
             </ButtonComponent>

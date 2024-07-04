@@ -1,4 +1,4 @@
-import { ReactElement } from "react"
+import { CSSProperties, ReactElement } from "react"
 import styled from "styled-components"
 
 interface FormButtonsProps {
@@ -12,9 +12,9 @@ const FormButtonsComponent = styled.div<FormButtonsProps>`
     justify-content: ${props => props.align || "start"};
 `
 
-export default function FormButtons(props: { children?: ReactElement | ReactElement[], align?: "start" | "center" | "end" }) {
+export default function FormButtons(props: { style?: CSSProperties, children?: ReactElement | ReactElement[], align?: "start" | "center" | "end" }) {
     return (
-        <FormButtonsComponent align={props.align}>
+        <FormButtonsComponent align={props.align} style={props.style}>
             {props.children}
         </FormButtonsComponent>
     )

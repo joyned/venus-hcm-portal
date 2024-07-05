@@ -19,6 +19,7 @@ import { findAllContractTypes } from "../../Service/ContractTypeService";
 import { findAllGenders } from "../../Service/DiversityAndInclusionService";
 import { findEmployeeById, saveEmployee } from "../../Service/EmployeeService";
 import { findAllRolesByFilter } from "../../Service/RoleService";
+import Label from "../../Components/Label";
 
 export default function EmployeeFormPage() {
     const navigate = useNavigate();
@@ -203,19 +204,19 @@ export default function EmployeeFormPage() {
             <Panel title="Dados Básicos">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <span>Nome Completo: </span>
+                        <Label required>Nome Completo: </Label>
                         <Input type="text" value={name} onChange={(value) => setName(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Data de Nascimento: </span>
+                        <Label required>Data de Nascimento: </Label>
                         <Input type="date" value={birthdate} onChange={(value) => setBirthDate(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Gênero: </span>
+                        <Label required>Gênero: </Label>
                         <Select value={gender} options={genderOptions} onChange={(value) => setGender(value)}></Select>
                     </FormItem>
                     <FormItem>
-                        <span>Estado Civil: </span>
+                        <Label required>Estado Civil: </Label>
                         <Input type="text" value={maritalStatus} onChange={(value) => setMaritalStatus(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -223,27 +224,27 @@ export default function EmployeeFormPage() {
             <Panel title="Contato">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <span>Rua/Avenida: </span>
+                        <Label required>Rua/Avenida: </Label>
                         <Input type="text" value={street} onChange={(value) => setStreet(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Número: </span>
+                        <Label required>Número: </Label>
                         <Input type="number" value={number} onChange={(value) => setNumber(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Bairro: </span>
+                        <Label required>Bairro: </Label>
                         <Input type="text" value={neighborhood} onChange={(value) => setNeighborhood(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Cidade: </span>
+                        <Label required>Cidade: </Label>
                         <Input type="text" value={city} onChange={(value) => setCity(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>E-mail: </span>
+                        <Label required>E-mail: </Label>
                         <Input type="email" value={email} onChange={(value) => setEmail(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Telefone: </span>
+                        <Label required>Telefone: </Label>
                         <Input type="text" value={telephone} onChange={(value) => setTelephone(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -251,27 +252,27 @@ export default function EmployeeFormPage() {
             <Panel title="Documentação">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <span>CPF: </span>
+                        <Label required>CPF: </Label>
                         <Input type="text" value={cpf} onChange={(value) => setCpf(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>RG - Orgão Emissor: </span>
+                        <Label required>RG - Orgão Emissor: </Label>
                         <Input type="number" value={rg} onChange={(value) => setRg(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Carteira de Trabalho (Número - Série): </span>
+                        <Label required>Carteira de Trabalho (Número - Série): </Label>
                         <Input type="text" value={workCard} onChange={(value) => setWorkCard(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Título de Eleitor: </span>
+                        <Label required>Título de Eleitor: </Label>
                         <Input type="text" value={voterRegistration} onChange={(value) => setVoterRegistration(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>CNH (se houver): </span>
+                        <Label>CNH: </Label>
                         <Input type="text" value={license} onChange={(value) => setLicense(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Passaporte (se houver): </span>
+                        <Label>Passaporte: </Label>
                         <Input type="text" value={passport} onChange={(value) => setPassport(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -279,23 +280,23 @@ export default function EmployeeFormPage() {
             <Panel title="Cargo e Departamento">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <span>Cargo/função: </span>
+                        <Label required>Cargo/função: </Label>
                         <Select options={rolesOptions} value={role} onChange={(value) => setRole(value)}></Select>
                     </FormItem>
                     <FormItem>
-                        <span>Departamento/setor: </span>
+                        <Label>Departamento/setor: </Label>
                         <Input type="text" value={role?.department.name} disabled></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Data de admissão: </span>
+                        <Label required>Data de admissão: </Label>
                         <Input type="date" value={admissionDate} onChange={(value) => setAdmissionDate(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Matrícula do funcionário: </span>
+                        <Label>Matrícula do funcionário: </Label>
                         <Input type="text" value={employeeNumber} onChange={(value) => setEmployeeNumber(value)} disabled></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Supervisor imediato: </span>
+                        <Label required>Supervisor imediato: </Label>
                         <Input type="text" value={supervisor} onChange={(value) => setSupervisor(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -303,19 +304,19 @@ export default function EmployeeFormPage() {
             <Panel title="Contratação">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <span>Tipo de contrato: </span>
+                        <Label required>Tipo de contrato: </Label>
                         <Select value={contractType} options={contractTypesOptions} onChange={(value) => setContractType(value)}></Select>
                     </FormItem>
                     <FormItem>
-                        <span>Regime de trabalho: </span>
+                        <Label required>Regime de trabalho: </Label>
                         <Input type="text" value={workRegime} onChange={(value) => setWorkRegime(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Jornada de trabalho: </span>
+                        <Label required>Jornada de trabalho: </Label>
                         <Input type="text" value={workload} onChange={(value) => setWorkload(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Local de trabalho: </span>
+                        <Label required>Local de trabalho: </Label>
                         <Select value={workplace} options={citiesOptions} optionLabel="city" onChange={(value) => setWorkplace(value)}></Select>
                     </FormItem>
                 </ResponsiveGrid>
@@ -323,15 +324,15 @@ export default function EmployeeFormPage() {
             <Panel title="Salário e Benefícios">
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <span>Salário base: </span>
+                        <Label required>Salário base: </Label>
                         <Input type="text" value={salary} onChange={(value) => setSalary(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Adicionais (periculosidade, insalubridade): </span>
+                        <Label required>Adicionais (periculosidade, insalubridade): </Label>
                         <Input type="text" value={additionals} onChange={(value) => setAdditionals(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Benefícios (vale-transporte, vale-alimentação, plano de saúde, etc.): </span>
+                        <Label required>Benefícios (vale-transporte, vale-alimentação, plano de saúde, etc.): </Label>
                         <Input type="text" value={benefits} onChange={(value) => setBenefits(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -339,15 +340,15 @@ export default function EmployeeFormPage() {
             <Panel title="Informações Bancárias">
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <span>Banco: </span>
+                        <Label required>Banco: </Label>
                         <Input type="text" value={bank} onChange={(value) => setBank(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Agência: </span>
+                        <Label required>Agência: </Label>
                         <Input type="text" value={agency} onChange={(value) => setAgency(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Conta corrente: </span>
+                        <Label required>Conta corrente: </Label>
                         <Input type="text" value={account} onChange={(value) => setAccount(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -355,15 +356,15 @@ export default function EmployeeFormPage() {
             <Panel title="Contato de Emergência">
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <span>Nome: </span>
+                        <Label>Nome: </Label>
                         <Input type="text" value={emergencyContactName} onChange={(value) => setEmergencyContactName(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Parentesco: </span>
+                        <Label>Parentesco: </Label>
                         <Input type="text" value={emergencyContactRelationship} onChange={(value) => setEmergencyContactRelationship(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <span>Telefone: </span>
+                        <Label>Telefone: </Label>
                         <Input type="text" value={emergencyContactTelephone} onChange={(value) => setEmergencyContactTelephone(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>

@@ -15,6 +15,8 @@ import { RoleModel } from "../../Model/RoleModel";
 import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
 import { findRoleById, saveRole } from "../../Service/RoleService";
 import Toast from "../../Components/Toast";
+import Label from "../../Components/Label";
+import { isNotBlankOrEmpty } from "../../Utils/GeneralUtils";
 
 export default function RoleFormPage() {
     const toast = useRef<any>(null);
@@ -61,7 +63,7 @@ export default function RoleFormPage() {
     const onSubmit = (e: any) => {
         e.preventDefault();
 
-        if (department && roleName && description) {
+        if (department && isNotBlankOrEmpty(roleName)) {
             setLoading(true)
             const role: RoleModel = {
                 id: roleId,
@@ -95,11 +97,11 @@ export default function RoleFormPage() {
             <Panel title={roleName ? roleName : 'Novo cargo'}>
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <label>Nome</label>
+                        <Label required>Nome</Label>
                         <Input type="text" value={roleName} onChange={(value) => setRoleName(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <label>Deparamento</label>
+                        <Label required>Deparamento</Label>
                         <Select value={department} options={departamentOptions} optionLabel="name" onChange={(obj) => setDepartment(obj)}></Select>
                     </FormItem>
                     <FormItem>

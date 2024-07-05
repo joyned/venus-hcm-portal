@@ -1,8 +1,9 @@
 import axios from "axios";
 import { RoleModel } from "../Model/RoleModel";
 
-const findAllRolesByFilter = (name: string, departamentId: number) => {
-    return axios.get<RoleModel[]>(`${process.env.REACT_APP_API_URL}/role/filter?name=${name}&departmentId=${departamentId}`);
+const findAllRolesByFilter = (name: string, departamentId: number, onlyActives?: boolean) => {
+    if(onlyActives === undefined) onlyActives = true;
+    return axios.get<RoleModel[]>(`${process.env.REACT_APP_API_URL}/role/filter?name=${name}&departmentId=${departamentId}&onlyActive=${onlyActives}`);
 }
 
 const findRoleById = (id: number) => {

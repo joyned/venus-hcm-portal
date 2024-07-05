@@ -9,6 +9,7 @@ const GridContainer = styled.div <GridContainerProps> `
   display: grid;
   grid-template-columns: ${({ columns }) => `repeat(${columns}, 1fr)`};
   gap: 16px;
+  margin-bottom: 20px;
 
   @media (max-width: 1200px) {
     grid-template-columns: ${({ columns }) => `repeat(auto-fit, minmax(${1200 / columns}px, 1fr))`};

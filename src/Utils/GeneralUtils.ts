@@ -12,4 +12,8 @@ function enumToJsonArray(enumObj: any): { name: string; value: string }[] {
   return jsonArray;
 }
 
-export { enumToJsonArray };
+function isNotBlankOrEmpty(value: string | undefined): boolean {
+  return value !== undefined && value.trim() !== '';
+}
+
+export { enumToJsonArray, isNotBlankOrEmpty };

@@ -15,6 +15,7 @@ import { RoleModel } from "../../Model/RoleModel";
 import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
 import { findAllRolesByFilter } from "../../Service/RoleService";
 import Toast from "../../Components/Toast";
+import InputSwitch from "../../Components/InputSwitch";
 
 
 export default function RolePage() {
@@ -25,7 +26,8 @@ export default function RolePage() {
     const [departamentOptions, setDepartamentOptions] = useState<DepartmentModel[]>([]);
 
     const [roleName, setRoleName] = useState<string>("");
-    const [department, setDepartment] = useState<DepartmentModel>();
+    const [department, setDepartment] = useState<DepartmentModel | undefined>();
+    const [onlyActive, setOnlyActive] = useState<boolean>(true);
 
     const [roles, setRoles] = useState<RoleModel[]>([]);
 
@@ -44,7 +46,7 @@ export default function RolePage() {
     const onFilter = (e: any) => {
         e.preventDefault();
         setLoading(true);
-        findAllRolesByFilter(roleName, department?.id || 0)
+        findAllRolesByFilter(roleName, department?.id || 0, onlyActive)
             .then(response => {
                 setRoles(response.data);
                 setLoading(false);
@@ -54,11 +56,16 @@ export default function RolePage() {
             })
     }
 
+    const onResetFilter = () => {
+        setRoleName("")
+        setDepartment(undefined)
+    }
+
     const dataTemplate = () => {
         return (roles.map((item, index) => {
             return (
                 <TableRow key={index}>
-                    <TableData data-label="Cargo">{item.name}</TableData>
+                    <TableData data-label="Cargo" active={item.active}>{item.name}</TableData>
                     <TableData data-label="Departamento">{item.department.name}</TableData>
                     <TableData data-label="Ações">
                         <FaEdit onClick={() => navigate(`/roles-and-departments/role/${item.id}`)}></FaEdit>
@@ -86,10 +93,14 @@ export default function RolePage() {
                             <label>Departamento</label>
                             <Select value={department} options={departamentOptions} optionLabel="name" onChange={(obj) => setDepartment(obj)}></Select>
                         </FormItem>
+                        <FormItem>
+                            <label>Somente ativos?</label>
+                            <InputSwitch value={onlyActive} onChange={(value) => setOnlyActive(value)}></InputSwitch>
+                        </FormItem>
                     </ResponsiveGrid>
                     <FormButtons>
                         <Button type="submit" label="Filtrar"></Button>
-                        <Button type="reset" label="Limpar" transparent></Button>
+                        <Button type="reset" label="Limpar" onClick={() => onResetFilter()} transparent></Button>
                     </FormButtons>
                 </form>
             </Panel>

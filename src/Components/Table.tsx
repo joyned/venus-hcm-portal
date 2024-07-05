@@ -4,6 +4,7 @@ import { useLoading } from "./Loading";
 
 interface TableProps {
     align?: string;
+    active?: boolean;
 }
 
 const TableHeader = styled.thead`
@@ -31,6 +32,7 @@ const TableData = styled.td<TableProps>`
     padding: 30px;
     font-size: ${root.textSize};
     text-align: ${(props) => props.align || "left"};
+    color: ${(props) => props.active !== undefined ? props.active ? root.textColor : "red" : root.textColor};
 `;
 
 

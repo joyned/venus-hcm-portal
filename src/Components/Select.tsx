@@ -65,6 +65,8 @@ export default function Select(props: {
             if (selectedIndex !== undefined && selectedIndex !== -1) {
                 setSelectedValue(selectedIndex.toString());
             }
+        } else {
+            setSelectedValue(undefined);
         }
     }, [props.value, props.options]);
 

@@ -2,137 +2,136 @@ import VenusHCMMenu from "../Model/VenusHCMMenu";
 
 const hcmMenu: VenusHCMMenu[] = [
     {
-        name: "Cargo e Departamentos",
+        name: "menu.rolesAndDepartments",
         subMenu: [
-            { name: "Cadastro de cargos", uri: "/roles-and-departments/role", subMenu: [] },
-            { name: "Cadastro de departamentos", uri: "/roles-and-departments/department", subMenu: [] },
+            { name: "menu.roleRegister", uri: "/roles-and-departments/role", subMenu: [] },
+            { name: "menu.departmentRegister", uri: "/roles-and-departments/department", subMenu: [] },
         ]
     },
     {
-        name: "Administração de Pessoal",
+        name: "menu.personnelAdministration",
         subMenu: [
-            { name: "Cadastro de funcionários", uri: "/personal-administration/employee", subMenu: [] },
-            { name: "Histórico de cargos e funções", uri: "/personal-administration/functions-history", subMenu: [] },
+            { name: "menu.employeeRegistration", uri: "/personal-administration/employee", subMenu: [] },
+            { name: "menu.jobAndFunctionHistory", uri: "/personal-administration/functions-history", subMenu: [] },
         ],
     },
     {
-        name: "Recrutamento e Seleção",
+        name: "menu.recruitmentAndSelection",
         subMenu: [
-            { name: "Publicação de vagas", uri: "/recruitment/publishing", subMenu: [] },
-            { name: "Triagem de currículos", uri: "/recruitment/resume-screening", subMenu: [] },
-            { name: "Gestão de entrevistas", uri: "/recruitment/interview-management", subMenu: [] },
-            { name: "Onboarding de novos funcionários", uri: "/recruitment/employee-onboarding", subMenu: [] },
+            { name: "menu.jobPosting", uri: "/recruitment/publishing", subMenu: [] },
+            { name: "menu.resumeScreening", uri: "/recruitment/resume-screening", subMenu: [] },
+            { name: "menu.interviewManagement", uri: "/recruitment/interview-management", subMenu: [] },
+            { name: "menu.newEmployeeOnboarding", uri: "/recruitment/employee-onboarding", subMenu: [] },
         ],
     },
     {
-        name: "Gestão de Desempenho",
+        name: "menu.performanceManagement",
         subMenu: [
-            { name: "Avaliações de desempenho", subMenu: [] },
-            { name: "Metas e objetivos", subMenu: [] },
-            { name: "Feedback contínuo", subMenu: [] },
+            { name: "menu.performanceEvaluations", subMenu: [] },
+            { name: "menu.goalsAndObjectives", subMenu: [] },
+            { name: "menu.continuousFeedback", subMenu: [] },
         ],
     },
     {
-        name: "Treinamento e Desenvolvimento",
+        name: "menu.trainingAndDevelopment",
         subMenu: [
-            { name: "Planos de carreira", subMenu: [] },
-            { name: "Programas de treinamento", subMenu: [] },
-            { name: "Gestão de competências", subMenu: [] },
-            { name: "Avaliação de eficácia dos treinamentos", subMenu: [] },
+            { name: "menu.careerPlans", subMenu: [] },
+            { name: "menu.trainingPrograms", subMenu: [] },
+            { name: "menu.competencyManagement", subMenu: [] },
+            { name: "menu.trainingEffectivenessEvaluation", subMenu: [] },
         ],
     },
     {
-        name: "Gestão de Benefícios",
+        name: "menu.benefitsManagement",
         subMenu: [
-            { name: "Planos de saúde", subMenu: [] },
-            { name: "Previdência privada", subMenu: [] },
-            { name: "Vale-refeição/alimentação", subMenu: [] },
-            { name: "Benefícios flexíveis", subMenu: [] },
+            { name: "menu.healthPlans", subMenu: [] },
+            { name: "menu.privatePension", subMenu: [] },
+            { name: "menu.mealFoodVoucher", subMenu: [] },
+            { name: "menu.flexibleBenefits", subMenu: [] },
         ],
     },
     {
-        name: "Folha de Pagamento",
+        name: "menu.payroll",
         subMenu: [
-            { name: "Cálculo de salários", subMenu: [] },
-            { name: "Gestão de impostos e contribuições", subMenu: [] },
-            { name: "Controle de horas extras e adicionais", subMenu: [] },
-            { name: "Emissão de contracheques", subMenu: [] },
+            { name: "menu.salaryCalculation", subMenu: [] },
+            { name: "menu.taxAndContributionManagement", subMenu: [] },
+            { name: "menu.overtimeAndAdditionalPayControl", subMenu: [] },
+            { name: "menu.paycheckIssuance", subMenu: [] },
         ],
     },
     {
-        name: "Gestão de Tempo e Presença",
+        name: "menu.timeAndAttendanceManagement",
         subMenu: [
-            { name: "Controle de ponto eletrônico", subMenu: [] },
-            { name: "Gestão de jornadas de trabalho", subMenu: [] },
-            { name: "Planejamento de escalas e turnos", subMenu: [] },
-            { name: "Gestão de ausências e férias", subMenu: [] },
+            { name: "menu.electronicTimekeeping", subMenu: [] },
+            { name: "menu.workScheduleManagement", subMenu: [] },
+            { name: "menu.shiftAndSchedulePlanning", subMenu: [] },
+            { name: "menu.absenceAndVacationManagement", subMenu: [] },
         ],
     },
     {
-        name: "Segurança e Saúde no Trabalho (SST)",
+        name: "menu.occupationalHealthAndSafety",
         subMenu: [
-            { name: "Programas de prevenção de riscos", subMenu: [] },
-            { name: "Controle de EPIs (Equipamentos de Proteção Individual)", subMenu: [] },
-            { name: "Gestão de acidentes de trabalho", subMenu: [] },
-            { name: "Exames médicos periódicos", subMenu: [] },
+            { name: "menu.riskPreventionPrograms", subMenu: [] },
+            { name: "menu.ppeControl", subMenu: [] },
+            { name: "menu.workAccidentManagement", subMenu: [] },
+            { name: "menu.periodicMedicalExaminations", subMenu: [] },
         ],
     },
     {
-        name: "Administração de Compensação",
+        name: "menu.compensationAdministration",
         subMenu: [
-            { name: "Estrutura de cargos e salários", subMenu: [] },
-            { name: "Pesquisas salariais", subMenu: [] },
-            { name: "Políticas de remuneração", subMenu: [] },
+            { name: "menu.jobAndSalaryStructure", subMenu: [] },
+            { name: "menu.salarySurveys", subMenu: [] },
+            { name: "menu.remunerationPolicies", subMenu: [] },
         ],
     },
     {
-        name: "Gestão de Relacionamento com Empregados",
+        name: "menu.employeeRelationshipManagement",
         subMenu: [
-            { name: "Comunicação interna", subMenu: [] },
-            { name: "Pesquisa de clima organizacional", subMenu: [] },
-            { name: "Gestão de conflitos", subMenu: [] },
+            { name: "menu.internalCommunication", subMenu: [] },
+            { name: "menu.organizationalClimateSurvey", subMenu: [] },
+            { name: "menu.conflictManagement", subMenu: [] },
         ],
     },
     {
-        name: "Relatórios e Analytics",
+        name: "menu.reportsAndAnalytics",
         subMenu: [
-            { name: "Relatórios de RH", subMenu: [] },
-            { name: "Dashboards de desempenho", subMenu: [] },
-            { name: "Análise de dados de RH", subMenu: [] },
+            { name: "menu.hrReports", subMenu: [] },
+            { name: "menu.performanceDashboards", subMenu: [] },
+            { name: "menu.hrDataAnalysis", subMenu: [] },
         ],
     },
     {
-        name: "Compliance e Governança",
+        name: "menu.complianceAndGovernance",
         subMenu: [
-            { name: "Políticas e procedimentos", subMenu: [] },
-            { name: "Conformidade com legislação trabalhista", subMenu: [] },
-            { name: "Auditorias internas de RH", subMenu: [] },
+            { name: "menu.policiesAndProcedures", subMenu: [] },
+            { name: "menu.complianceWithLaborLegislation", subMenu: [] },
+            { name: "menu.internalHrAudits", subMenu: [] },
         ],
     },
     {
-        name: "Gestão de Talentos",
+        name: "menu.talentManagement",
         subMenu: [
-            { name: "Identificação de talentos", subMenu: [] },
-            { name: "Sucessão e planejamento de carreira", subMenu: [] },
-            { name: "Retenção de talentos", subMenu: [] },
+            { name: "menu.talentIdentification", subMenu: [] },
+            { name: "menu.successionAndCareerPlanning", subMenu: [] },
+            { name: "menu.talentRetention", subMenu: [] },
         ],
     },
     {
-        name: "Administração Interna",
+        name: "menu.internalAdministration",
         subMenu: [
-            { name: "Bases", subMenu: [] },
-            { name: "Tipos de Contratos", subMenu: [] },
-            { name: "Diversidade / Inclusão", subMenu: [] },
+            { name: "menu.bases", subMenu: [] },
+            { name: "menu.typesOfContracts", subMenu: [] },
+            { name: "menu.diversityInclusion", subMenu: [] },
         ],
     },
     {
-        name: "Software e Integrações",
+        name: "menu.softwareAndIntegrations",
         subMenu: [
-            { name: "Cadastro de Integrações", subMenu: [] },
-            { name: "Leitura de Dados", subMenu: [] },
+            { name: "menu.integrationRegistration", subMenu: [] },
+            { name: "menu.dataReading", subMenu: [] },
         ]
     }
 ];
-
 
 export { hcmMenu }

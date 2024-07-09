@@ -10,6 +10,7 @@ import { leftSideMenu, root, topMenu } from "../Components/UI/Variables";
 import VenusHCMLogo from "../Components/VenusHCMLogo";
 import VenusHCMMenu from "../Model/VenusHCMMenu";
 import { hcmMenu } from "../Service/MenuService";
+import { useTranslation } from "react-i18next";
 
 const RootLayout = styled.div`
     background-color: ${root.backgroundColor};
@@ -95,6 +96,7 @@ const MainContent = styled.div<{ $menuOpened: boolean }>`
 `;
 
 export default function Root(props: { children?: ReactElement }) {
+    const { t } = useTranslation();
     const { loading } = useLoading();
     const navigate = useNavigate();
     const [latestMenu, setLatestMenu] = useState<VenusHCMMenu[] | undefined>(undefined);
@@ -141,13 +143,13 @@ export default function Root(props: { children?: ReactElement }) {
                     {latestMenu && (
                         <LeftSideMenuBackButton onClick={() => backMenu()}>
                             <IoIosArrowRoundBack />
-                            Voltar
+                            {t('back')}
                         </LeftSideMenuBackButton>
                     )}
                     {currentMenu.map((item, index) => {
                         return (
                             <LeftSideMenuItem onClick={() => changeMenu(item)} key={index}>
-                                {item.name}
+                                {t(item.name)}
                                 {item.subMenu.length > 0 && <FaCaretRight />}
                             </LeftSideMenuItem>
                         )

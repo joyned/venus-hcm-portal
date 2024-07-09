@@ -8,7 +8,7 @@ const LabelComponent = styled.label`
     }
 `
 
-export default function Label(props: { children: string, required?: boolean }) {
+export default function Label(props: { children: any, required?: boolean }) {
     return (
         <LabelComponent>
             {props.children}

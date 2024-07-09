@@ -1,4 +1,5 @@
 import { CSSProperties, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { input, root } from "./UI/Variables";
 
@@ -54,6 +55,7 @@ export default function Select(props: {
     required?: boolean,
     disabled?: boolean
 }) {
+    const { t } = useTranslation();
     const [selectedValue, setSelectedValue] = useState<string | undefined>("");
 
     useEffect(() => {
@@ -86,7 +88,7 @@ export default function Select(props: {
                 value={selectedValue}
                 onChange={handleChange}
                 disabled={props.disabled}>
-                <SelectOption value=""> -- select an option -- </SelectOption>
+                <SelectOption value="">{t('selectAnOption')}</SelectOption>
                 {props.options && props.options.map((option, index) =>
                     <SelectOption key={index} value={index}>{option[`${props.optionLabel ? props.optionLabel : 'name'}`]}</SelectOption>
                 )}

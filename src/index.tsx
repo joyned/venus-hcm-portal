@@ -6,6 +6,25 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import router from './router';
 import { LoadingProvider } from './Components/Loading';
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import pt from './i18n/pt.json';
+
+i18next
+  .use(initReactI18next)
+  .init({
+    resources: {
+      pt: {
+        translation: pt
+      }
+    },
+    lng: 'pt',
+    fallbackLng: 'pt',
+
+    interpolation: {
+      escapeValue: false
+    }
+  })
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

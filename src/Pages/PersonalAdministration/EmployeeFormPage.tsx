@@ -20,8 +20,10 @@ import { findAllGenders } from "../../Service/DiversityAndInclusionService";
 import { findEmployeeById, saveEmployee } from "../../Service/EmployeeService";
 import { findAllRolesByFilter } from "../../Service/RoleService";
 import Label from "../../Components/Label";
+import { useTranslation } from "react-i18next";
 
 export default function EmployeeFormPage() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const params = useParams();
     const { setLoading } = useLoading();
@@ -204,19 +206,19 @@ export default function EmployeeFormPage() {
             <Panel title="Dados Básicos">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <Label required>Nome Completo: </Label>
+                        <Label required>{t('fullName')}: </Label>
                         <Input type="text" value={name} onChange={(value) => setName(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Data de Nascimento: </Label>
+                        <Label required>{t('dateOfBirth')}: </Label>
                         <Input type="date" value={birthdate} onChange={(value) => setBirthDate(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Gênero: </Label>
+                        <Label required>{t('gender')}: </Label>
                         <Select value={gender} options={genderOptions} onChange={(value) => setGender(value)}></Select>
                     </FormItem>
                     <FormItem>
-                        <Label required>Estado Civil: </Label>
+                        <Label required>{t('civilStatus')}: </Label>
                         <Input type="text" value={maritalStatus} onChange={(value) => setMaritalStatus(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -224,27 +226,27 @@ export default function EmployeeFormPage() {
             <Panel title="Contato">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <Label required>Rua/Avenida: </Label>
+                        <Label required>{t('streetAndAvenue')}: </Label>
                         <Input type="text" value={street} onChange={(value) => setStreet(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Número: </Label>
+                        <Label required>{t('number')}: </Label>
                         <Input type="number" value={number} onChange={(value) => setNumber(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Bairro: </Label>
+                        <Label required>{t('neighborhood')}: </Label>
                         <Input type="text" value={neighborhood} onChange={(value) => setNeighborhood(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Cidade: </Label>
+                        <Label required>{t('city')}: </Label>
                         <Input type="text" value={city} onChange={(value) => setCity(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>E-mail: </Label>
+                        <Label required>{t('email')}: </Label>
                         <Input type="email" value={email} onChange={(value) => setEmail(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Telefone: </Label>
+                        <Label required>{t('phone')}: </Label>
                         <Input type="text" value={telephone} onChange={(value) => setTelephone(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -252,27 +254,27 @@ export default function EmployeeFormPage() {
             <Panel title="Documentação">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <Label required>CPF: </Label>
+                        <Label required>{t('cpf')}: </Label>
                         <Input type="text" value={cpf} onChange={(value) => setCpf(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>RG - Orgão Emissor: </Label>
+                        <Label required>{t('rg')}: </Label>
                         <Input type="number" value={rg} onChange={(value) => setRg(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Carteira de Trabalho (Número - Série): </Label>
+                        <Label required>{t('workCard')}: </Label>
                         <Input type="text" value={workCard} onChange={(value) => setWorkCard(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Título de Eleitor: </Label>
+                        <Label required>{t('voteCard')}: </Label>
                         <Input type="text" value={voterRegistration} onChange={(value) => setVoterRegistration(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label>CNH: </Label>
+                        <Label>{t('license')}: </Label>
                         <Input type="text" value={license} onChange={(value) => setLicense(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label>Passaporte: </Label>
+                        <Label>{t('passport')}: </Label>
                         <Input type="text" value={passport} onChange={(value) => setPassport(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -280,23 +282,23 @@ export default function EmployeeFormPage() {
             <Panel title="Cargo e Departamento">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <Label required>Cargo/função: </Label>
+                        <Label required>{t('role')}: </Label>
                         <Select options={rolesOptions} value={role} onChange={(value) => setRole(value)}></Select>
                     </FormItem>
                     <FormItem>
-                        <Label>Departamento/setor: </Label>
+                        <Label>{t('department')}: </Label>
                         <Input type="text" value={role?.department.name} disabled></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Data de admissão: </Label>
+                        <Label required>{t('admissionDate')}: </Label>
                         <Input type="date" value={admissionDate} onChange={(value) => setAdmissionDate(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label>Matrícula do funcionário: </Label>
+                        <Label>{t('employeeId')}: </Label>
                         <Input type="text" value={employeeNumber} onChange={(value) => setEmployeeNumber(value)} disabled></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Supervisor imediato: </Label>
+                        <Label required>{t('supervisor')}: </Label>
                         <Input type="text" value={supervisor} onChange={(value) => setSupervisor(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -304,19 +306,19 @@ export default function EmployeeFormPage() {
             <Panel title="Contratação">
                 <ResponsiveGrid columns={2}>
                     <FormItem>
-                        <Label required>Tipo de contrato: </Label>
+                        <Label required>{t('contractType')}: </Label>
                         <Select value={contractType} options={contractTypesOptions} onChange={(value) => setContractType(value)}></Select>
                     </FormItem>
                     <FormItem>
-                        <Label required>Regime de trabalho: </Label>
+                        <Label required>{t('workRegime')}: </Label>
                         <Input type="text" value={workRegime} onChange={(value) => setWorkRegime(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Jornada de trabalho: </Label>
+                        <Label required>{t('workload')}: </Label>
                         <Input type="text" value={workload} onChange={(value) => setWorkload(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Local de trabalho: </Label>
+                        <Label required>{t('workplace')}: </Label>
                         <Select value={workplace} options={citiesOptions} optionLabel="city" onChange={(value) => setWorkplace(value)}></Select>
                     </FormItem>
                 </ResponsiveGrid>
@@ -324,15 +326,15 @@ export default function EmployeeFormPage() {
             <Panel title="Salário e Benefícios">
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <Label required>Salário base: </Label>
+                        <Label required>{t('salary')}: </Label>
                         <Input type="text" value={salary} onChange={(value) => setSalary(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Adicionais (periculosidade, insalubridade): </Label>
+                        <Label required>{t('additional')}: </Label>
                         <Input type="text" value={additionals} onChange={(value) => setAdditionals(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Benefícios (vale-transporte, vale-alimentação, plano de saúde, etc.): </Label>
+                        <Label required>{t('benefits')}: </Label>
                         <Input type="text" value={benefits} onChange={(value) => setBenefits(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -340,15 +342,15 @@ export default function EmployeeFormPage() {
             <Panel title="Informações Bancárias">
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <Label required>Banco: </Label>
+                        <Label required>{t('bank')}: </Label>
                         <Input type="text" value={bank} onChange={(value) => setBank(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Agência: </Label>
+                        <Label required>{t('agency')}: </Label>
                         <Input type="text" value={agency} onChange={(value) => setAgency(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Conta corrente: </Label>
+                        <Label required>{t('account')}: </Label>
                         <Input type="text" value={account} onChange={(value) => setAccount(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>
@@ -356,15 +358,15 @@ export default function EmployeeFormPage() {
             <Panel title="Contato de Emergência">
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <Label>Nome: </Label>
+                        <Label>{t('name')}: </Label>
                         <Input type="text" value={emergencyContactName} onChange={(value) => setEmergencyContactName(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label>Parentesco: </Label>
+                        <Label>{t('relationship')}: </Label>
                         <Input type="text" value={emergencyContactRelationship} onChange={(value) => setEmergencyContactRelationship(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label>Telefone: </Label>
+                        <Label>{t('phone')}: </Label>
                         <Input type="text" value={emergencyContactTelephone} onChange={(value) => setEmergencyContactTelephone(value)}></Input>
                     </FormItem>
                 </ResponsiveGrid>

@@ -4,6 +4,7 @@ import { FiMenu } from "react-icons/fi";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Language from "../Components/Language";
 import Loading, { useLoading } from "../Components/Loading";
 import { leftSideMenu, root, topMenu } from "../Components/UI/Variables";
 import VenusHCMLogo from "../Components/VenusHCMLogo";
@@ -35,7 +36,9 @@ const TopBarItems = styled.div`
 `
 
 const TopBarItem = styled.div`
-    display: inline-block;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
 
     svg {
         cursor: pointer;
@@ -129,6 +132,7 @@ export default function Root(props: { children?: ReactElement }) {
                             <VenusHCMLogo width="160px" />
                         </TopBarItem>
                         <TopBarItem>
+                            <Language></Language>
                             <FaRegUser />
                         </TopBarItem>
                     </TopBarItems>

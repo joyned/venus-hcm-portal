@@ -9,6 +9,7 @@ import { LoadingProvider } from './Components/Loading';
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import pt from './i18n/pt.json';
+import en from './i18n/en.json';
 
 i18next
   .use(initReactI18next)
@@ -16,6 +17,9 @@ i18next
     resources: {
       pt: {
         translation: pt
+      },
+      en: {
+        translation: en
       }
     },
     lng: 'pt',

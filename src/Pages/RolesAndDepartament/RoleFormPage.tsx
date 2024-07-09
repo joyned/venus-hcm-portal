@@ -17,8 +17,10 @@ import { findRoleById, saveRole } from "../../Service/RoleService";
 import Toast from "../../Components/Toast";
 import Label from "../../Components/Label";
 import { isNotBlankOrEmpty } from "../../Utils/GeneralUtils";
+import { useTranslation } from "react-i18next";
 
 export default function RoleFormPage() {
+    const { t } = useTranslation();
     const toast = useRef<any>(null);
     const params = useParams();
     const navigate = useNavigate();
@@ -91,25 +93,25 @@ export default function RoleFormPage() {
         <form onSubmit={(e) => onSubmit(e)}>
             <Toast ref={toast}></Toast>
             <FormButtons align="end">
-                <Button label="Salvar" type="submit"></Button>
-                <Button label="Voltar" transparent type="button" onClick={() => navigate("/roles-and-departments/role")}></Button>
+                <Button label={t('save')} type="submit"></Button>
+                <Button label={t('back')} transparent type="button" onClick={() => navigate("/roles-and-departments/role")}></Button>
             </FormButtons>
-            <Panel title={roleName ? roleName : 'Novo cargo'}>
+            <Panel title={roleName ? roleName : t('newRole')}>
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <Label required>Nome</Label>
+                        <Label required>{t('name')}:</Label>
                         <Input type="text" value={roleName} onChange={(value) => setRoleName(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <Label required>Deparamento</Label>
+                        <Label required>{t('department')}:</Label>
                         <Select value={department} options={departamentOptions} optionLabel="name" onChange={(obj) => setDepartment(obj)}></Select>
                     </FormItem>
                     <FormItem>
-                        <label>Descrição</label>
+                        <label>{t('description')}:</label>
                         <TextArea value={description} onChange={(value) => setDescription(value)}></TextArea>
                     </FormItem>
                     <FormItem>
-                        <label>Ativo</label>
+                        <label>{t('active')}</label>
                         <InputSwitch value={active} onChange={() => setActive(!active)}></InputSwitch>
                     </FormItem>
                 </ResponsiveGrid>

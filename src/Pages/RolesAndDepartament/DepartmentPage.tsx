@@ -12,8 +12,10 @@ import DataTable, { TableData, TableRow } from "../../Components/Table";
 import { DepartmentModel } from "../../Model/DepartmentModel";
 import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
 import Toast from "../../Components/Toast";
+import { useTranslation } from "react-i18next";
 
 export default function DepartmentPage() {
+    const { t } = useTranslation();
     const toast = useRef<any>(null);
     const { setLoading } = useLoading();
     const navigate = useNavigate();
@@ -52,25 +54,25 @@ export default function DepartmentPage() {
         <>
             <Toast ref={toast}></Toast>
             <FormButtons align="end">
-                <Button label="Adicionar departamento" onClick={() => navigate("/roles-and-departments/department/0")}></Button>
+                <Button label={t('addDepartment')} onClick={() => navigate("/roles-and-departments/department/0")}></Button>
             </FormButtons>
 
-            <Panel title="Cadastro de departamentos">
+            <Panel title={t('departmentRegister')}>
                 <form onSubmit={(e) => onFilter(e)}>
                     <ResponsiveGrid columns={1}>
                         <FormItem>
-                            <label>Departamento</label>
+                            <label>{t('department')}</label>
                             <Input type="text" value={filterName} onChange={(value) => setFilterName(value)}></Input>
                         </FormItem>
                     </ResponsiveGrid>
                     <FormButtons>
-                        <Button type="submit" label="Filtrar"></Button>
-                        <Button type="reset" label="Limpar" transparent></Button>
+                        <Button type="submit" label={t('filter')}></Button>
+                        <Button type="reset" label={t('clean')} transparent></Button>
                     </FormButtons>
-                </form>
+                </form> 
             </Panel>
-            <Panel title="Resultado">
-                <DataTable headers={["Departamento", "Ações"]} data={departments} dataTemaplte={dataTemplate()}></DataTable>
+            <Panel title={t('result')}>
+                <DataTable headers={[t('department'), t('actions')]} data={departments} dataTemaplte={dataTemplate()}></DataTable>
             </Panel>
         </>
     )

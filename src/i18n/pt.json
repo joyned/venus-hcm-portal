@@ -1,4 +1,17 @@
 {
+    "save": "Salvar",
+    "back": "Voltar",
+    "filter": "Pesquisar",
+    "clean": "Limpar",
+    "result": "Resultado",
+    "actions": "Ações",
+    "active": "Ativo",
+    "onlyActive": "Somente ativos?",
+    "rolesAndDeparments": "Cargos e departamentos",
+    "roleRegister": "Cadastro de cargos",
+    "departmentRegister": "Cadastro de departamentos",
+    "addDepartment": "Adicionar departamento",
+    "addRole": "Adicionar cargo",
     "fullName": "Nome completo",
     "dateOfBirth": "Data de nascimento",
     "gender": "Gênero",
@@ -32,5 +45,8 @@
     "account": "Conta",
     "name": "Nome",
     "relationship": "Parentesco",
-    "selectAnOption": "-- Selecione uma opção --"
+    "selectAnOption": "-- Selecione uma opção --",
+    "newDepartment": "Novo departamento",
+    "newRole": "Novo cargo",
+    "description": "Descrição"
 }

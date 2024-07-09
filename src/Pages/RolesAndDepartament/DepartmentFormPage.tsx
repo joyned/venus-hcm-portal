@@ -12,8 +12,11 @@ import TextArea from "../../Components/TextArea";
 import Toast from "../../Components/Toast";
 import { DepartmentModel } from "../../Model/DepartmentModel";
 import { findDepartmentById, saveDepartment } from "../../Service/DepartmentService";
+import { useTranslation } from "react-i18next";
+import Label from "../../Components/Label";
 
 export default function DepartmentFormPage() {
+    const { t } = useTranslation();
     const toast = useRef<any>(null);
     const { setLoading } = useLoading();
     const params = useParams()
@@ -67,17 +70,17 @@ export default function DepartmentFormPage() {
         <form onSubmit={(e) => onSubmit(e)}>
             <Toast ref={toast}></Toast>
             <FormButtons align="end">
-                <Button label="Salvar" type="submit"></Button>
-                <Button label="Voltar" transparent type="button" onClick={() => navigate(`/roles-and-departments/department`)}></Button>
+                <Button label={t('save')} type="submit"></Button>
+                <Button label={t('back')} transparent type="button" onClick={() => navigate(`/roles-and-departments/department`)}></Button>
             </FormButtons>
-            <Panel title={name ? name : 'Novo departamento'}>
+            <Panel title={name ? name : t('newDepartment')}>
                 <ResponsiveGrid columns={1}>
                     <FormItem>
-                        <label>Nome</label>
+                        <Label required>{t('name')}:</Label>
                         <Input type="text" value={name} onChange={(value) => setName(value)}></Input>
                     </FormItem>
                     <FormItem>
-                        <label>Descrição</label>
+                        <label>{t('description')}:</label>
                         <TextArea value={description} onChange={(value) => setDescription(value)}></TextArea>
                     </FormItem>
                 </ResponsiveGrid>

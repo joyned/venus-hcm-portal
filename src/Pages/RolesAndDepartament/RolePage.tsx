@@ -16,9 +16,11 @@ import { findAllDepartmentsByFilter } from "../../Service/DepartmentService";
 import { findAllRolesByFilter } from "../../Service/RoleService";
 import Toast from "../../Components/Toast";
 import InputSwitch from "../../Components/InputSwitch";
+import { useTranslation } from "react-i18next";
 
 
 export default function RolePage() {
+    const { t } = useTranslation();
     const { setLoading } = useLoading();
     const toast = useRef<any>(null);
     const navigate = useNavigate();
@@ -79,33 +81,33 @@ export default function RolePage() {
         <>
             <Toast ref={toast}></Toast>
             <FormButtons align="end">
-                <Button label="Adicionar cargo" onClick={() => navigate("/roles-and-departments/role/0")}></Button>
+                <Button label={t('addRole')} onClick={() => navigate("/roles-and-departments/role/0")}></Button>
             </FormButtons>
 
-            <Panel title="Cadastro de cargos">
+            <Panel title={t('roleRegister')}>
                 <form onSubmit={(e) => onFilter(e)}>
                     <ResponsiveGrid columns={2}>
                         <FormItem>
-                            <label>Cargo</label>
+                            <label>{t('role')}</label>
                             <Input type="text" value={roleName} onChange={(value) => setRoleName(value)}></Input>
                         </FormItem>
                         <FormItem>
-                            <label>Departamento</label>
+                            <label>{t('department')}</label>
                             <Select value={department} options={departamentOptions} optionLabel="name" onChange={(obj) => setDepartment(obj)}></Select>
                         </FormItem>
                         <FormItem>
-                            <label>Somente ativos?</label>
+                            <label>{t('onlyActive')}</label>
                             <InputSwitch value={onlyActive} onChange={(value) => setOnlyActive(value)}></InputSwitch>
                         </FormItem>
                     </ResponsiveGrid>
                     <FormButtons>
-                        <Button type="submit" label="Filtrar"></Button>
-                        <Button type="reset" label="Limpar" onClick={() => onResetFilter()} transparent></Button>
+                        <Button type="submit" label={t('filter')}></Button>
+                        <Button type="reset" label={t('clean')} onClick={() => onResetFilter()} transparent></Button>
                     </FormButtons>
                 </form>
             </Panel>
-            <Panel title="Resultado">
-                <DataTable headers={["Cargo", "Departamento", "Ações"]} data={roles} dataTemaplte={dataTemplate()}></DataTable>
+            <Panel title={t('result')}>
+                <DataTable headers={[t('role'), t('department'), t('actions')]} data={roles} dataTemaplte={dataTemplate()}></DataTable>
             </Panel>
         </>
     )

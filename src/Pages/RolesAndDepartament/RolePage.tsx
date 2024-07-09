@@ -67,9 +67,9 @@ export default function RolePage() {
         return (roles.map((item, index) => {
             return (
                 <TableRow key={index}>
-                    <TableData data-label="Cargo" active={item.active}>{item.name}</TableData>
-                    <TableData data-label="Departamento">{item.department.name}</TableData>
-                    <TableData data-label="Ações">
+                    <TableData data-label={t('role')} active={item.active}>{item.name}</TableData>
+                    <TableData data-label={t('department')}>{item.department.name}</TableData>
+                    <TableData data-label={t('actions')}>
                         <FaEdit onClick={() => navigate(`/roles-and-departments/role/${item.id}`)}></FaEdit>
                     </TableData>
                 </TableRow>

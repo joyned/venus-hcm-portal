@@ -19,10 +19,12 @@ import { findAllCities } from "../../Service/CityBaseService"
 import { findAllDepartmentsByFilter } from "../../Service/DepartmentService"
 import { findEmployeeByFilter } from "../../Service/EmployeeService"
 import { findAllRolesByFilter } from "../../Service/RoleService"
+import { useTranslation } from "react-i18next"
 
 const EmployeePageContent = styled.div``
 
 export default function EmployeePage() {
+    const { t } = useTranslation();
     const { setLoading } = useLoading();
     const navigate = useNavigate();
 
@@ -72,11 +74,11 @@ export default function EmployeePage() {
             employees.map((item, index) => {
                 return (
                     <TableRow key={index}>
-                        <TableData data-label="Nome">{item.name}</TableData>
-                        <TableData data-label="Departamento">{item.role.department.name}</TableData>
-                        <TableData data-label="Cargo">{item.role.name}</TableData>
-                        <TableData data-label="Admissão">{String(item.admissionDate)}</TableData>
-                        <TableData data-label="Ações">
+                        <TableData data-label={t('name')}>{item.name}</TableData>
+                        <TableData data-label={t('department')}>{item.role.department.name}</TableData>
+                        <TableData data-label={t('role')}>{item.role.name}</TableData>
+                        <TableData data-label={t('admissionDate')}>{String(item.admissionDate)}</TableData>
+                        <TableData data-label={t('actions')}>
                             <FaEdit onClick={() => navigate(`/personal-administration/employee/${item.id}`)}></FaEdit>
                         </TableData>
                     </TableRow>
@@ -88,40 +90,40 @@ export default function EmployeePage() {
     return (
         <EmployeePageContent>
             <FormButtons align="end">
-                <Button type="button" onClick={() => navigate("/personal-administration/employee/0")} label="Novo Funcionário"></Button>
+                <Button type="button" onClick={() => navigate("/personal-administration/employee/0")} label={t('addEmployee')}></Button>
             </FormButtons>
-            <Panel title="Cadastro de funcionários">
+            <Panel title={t('employeeRegister')}>
                 <form onSubmit={(e) => onFilter(e)}>
                     <ResponsiveGrid columns={2}>
                         <FormItem>
-                            <label>Nome</label>
+                            <label>{t('name')}</label>
                             <Input type="text" value={name} onChange={(value) => setName(value)}></Input>
                         </FormItem>
                         <FormItem>
-                            <label>Cidade</label>
+                            <label>{t('city')}</label>
                             <Select value={city} options={cityOptions} optionLabel="city" onChange={(value) => setCity(value)}></Select>
                         </FormItem>
                         <FormItem>
-                            <label>Departamento</label>
+                            <label>{t('department')}</label>
                             <Select value={department} options={departmentOptions} onChange={(value) => onDepartmentSelect(value)}></Select>
                         </FormItem>
                         <FormItem>
-                            <label>Cargo</label>
+                            <label>{t('role')}</label>
                             <Select value={role} options={roleOptions} onChange={(value) => setRole(value)} disabled={!department}></Select>
                         </FormItem>
                         <FormItem>
-                            <label>Data de Admissão</label>
+                            <label>{t('admissionDate')}</label>
                             <Input type="date" value={admissionDate} onChange={(value) => setAdmissionDate(value)}></Input>
                         </FormItem>
                     </ResponsiveGrid>
                     <FormButtons>
-                        <Button type="submit" label="Filtrar"></Button>
-                        <Button type="reset" label="Limpar" transparent></Button>
+                        <Button type="submit" label={t('filter')}></Button>
+                        <Button type="reset" label={t('clean')} transparent></Button>
                     </FormButtons>
                 </form>
             </Panel>
             <Panel title="Resultado">
-                <DataTable headers={["Nome", "Departamento", "Cargo", "Data de Admissão", "Ações"]} dataTemaplte={dataTemplate()}></DataTable>
+                <DataTable headers={[t('name'), t('department'), t('role'), t('admissionDate'), t('actions')]} dataTemaplte={dataTemplate()}></DataTable>
             </Panel>
         </EmployeePageContent>
     )

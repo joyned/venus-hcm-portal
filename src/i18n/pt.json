@@ -12,6 +12,8 @@
     "departmentRegister": "Cadastro de departamentos",
     "addDepartment": "Adicionar departamento",
     "addRole": "Adicionar cargo",
+    "employeeRegister": "Cadastro de funcionários",
+    "addEmployee": "Adicionar funcionário",
     "fullName": "Nome completo",
     "dateOfBirth": "Data de nascimento",
     "gender": "Gênero",

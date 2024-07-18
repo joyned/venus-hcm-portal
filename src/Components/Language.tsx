@@ -13,8 +13,8 @@ const LanguageContainer = styled.div`
     display: inline-block;
     cursor: pointer;
 `
-const LanguageDropDown = styled.div<{ opened: boolean }>`
-    display: ${({ opened }) => opened ? 'block' : 'none'};
+const LanguageDropDown = styled.div<{ $opened: boolean }>`
+    display: ${({ $opened }) => $opened ? 'block' : 'none'};
     position: absolute;
     background-color: ${root.primaryColor};
     min-width: 160px;
@@ -53,7 +53,7 @@ export default function Language() {
         <LanguageComponent>
             <LanguageContainer>
                 <MdLanguage onClick={() => setOpened(!opened)}></MdLanguage>
-                <LanguageDropDown opened={opened}>
+                <LanguageDropDown $opened={opened}>
                     <LanguageDropDownContent>
                         <LanguageDropDownItem onClick={(e) => onLanguageChange(e, 'en')}>
                             <img src="/eua.svg" alt="EUA"></img>

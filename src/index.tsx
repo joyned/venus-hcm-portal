@@ -6,10 +6,11 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import router from './router';
 import { LoadingProvider } from './Components/Loading';
-import i18next from 'i18next';
+import i18next, { changeLanguage } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import pt from './i18n/pt.json';
 import en from './i18n/en.json';
+
 
 i18next
   .use(initReactI18next)
@@ -23,12 +24,16 @@ i18next
       }
     },
     lng: 'pt',
-    fallbackLng: 'pt',
+    fallbackLng: 'en',
 
     interpolation: {
       escapeValue: false
     }
   })
+
+var userLang = navigator.language;
+userLang = userLang.split('-')[0];
+i18next.changeLanguage(userLang);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
